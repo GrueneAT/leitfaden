@@ -1,6 +1,6 @@
 ---
 title: Making it look right
-order: 8
+order: 9
 summary: "Link https://design-system.gruene.at/design-system.css and set the four body properties from --gat-* tokens — the design system styles no HTML tags, so without them the page renders unstyled. Use gat-* component classes. Must work at 375px and by keyboard."
 read_when: "Always, for anything with a user interface."
 ---

@@ -1,6 +1,6 @@
 ---
 title: Data protection
-order: 10
+order: 12
 summary: "The tool must not transmit user data — no analytics, no tracking pixels, no remote calls carrying file contents. Say so visibly in the UI. Separately: warn the user not to paste personal data, donor lists or non-public drafts into the chat."
 read_when: "Always. Especially when the tool touches names, addresses, finances or anything non-public."
 ---
@@ -48,6 +48,18 @@ Never encourage the user to paste:
   and the **form structure** is fine; the donor list is not
 - Non-public drafts and confidential material from the administration
 - Third-party documents they are not permitted to pass on
+
+### When you have access to the folder
+
+An assistant that can read the working directory sees more than the user
+deliberately handed over. Files they forgot about are as readable as the one
+they meant to share.
+
+Act accordingly: do not open files that are not needed for the task, say
+plainly which files you read, and if you come across a membership list, an
+export with personal data or something marked confidential, name it and leave
+it alone rather than using it as sample data. Tell the user that a project
+folder is not a safe place for such files while an assistant is working in it.
 
 The substitute that works: **structure instead of content.** "I have a table
 with the columns Name, Year of birth, District, Amount — write the analysis

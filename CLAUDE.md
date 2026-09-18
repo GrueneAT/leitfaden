@@ -26,6 +26,16 @@ Wie viele Dateien darin liegen, ist eine Abwägung — eine Datei ist bei kleine
 Werkzeugen am leichtesten zu übergeben, mehrere sind erlaubt und brauchen
 keinen Server. Das ist ausdrücklich **keine Ein-Datei-Regel**.
 
+**Drittens: Es gibt zwei Liefermodi.** Entweder gibt die Assistenz Text aus,
+den die Nutzerin selbst speichert (Chat), oder sie schreibt direkt in einen
+Ordner (Claude Code, Cowork, Projects und Entsprechendes anderer Anbieter).
+Das Ein-Datei-Argument gilt **nur für den Chat-Fall**. Wer hier etwas ändert,
+prüft, ob die Aussage für beide Modi stimmt.
+
+Der zugehörige Fallstrick gehört immer mitgenannt: Die Assistenz hat
+vielleicht ein Terminal, die Nutzerin nicht. Nichts darf zurückbleiben, das
+einen Build-Schritt, einen Paketmanager oder einen Server braucht.
+
 Daraus folgt für Inhalte: keine ES-Module, kein `fetch()` auf lokale Dateien,
 kein Build-Schritt, kein lokaler Server im Hauptpfad. `npx` und
 Editor-Empfehlungen gehören ausschließlich in den letzten Abschnitt

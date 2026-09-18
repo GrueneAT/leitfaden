@@ -1,6 +1,6 @@
 ---
 title: Keeping data
-order: 4
+order: 5
 summary: "localStorage for settings and drafts (wrap every read in try/catch), IndexedDB for large or structured data. Storage is device-bound and can vanish — an export button is mandatory, not a feature."
 read_when: "Anything should survive closing the tab: settings, entered data, imported files."
 ---

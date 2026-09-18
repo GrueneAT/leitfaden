@@ -1,6 +1,6 @@
 ---
 title: Tables and numbers
-order: 5
+order: 6
 summary: "Use gat-table with gat-table__num for figures; right-align and use tabular-nums. Format with de-AT locale. Show a total row and make it verifiable. Sorting and filtering in plain JS, no grid library."
 read_when: "The tool shows rows of data or does arithmetic the user will quote."
 ---

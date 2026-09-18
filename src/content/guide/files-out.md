@@ -1,6 +1,6 @@
 ---
 title: Saving results
-order: 3
+order: 4
 summary: "Blob download via a temporary <a download> is the baseline and always works. Direct write-back with showSaveFilePicker is a Chrome/Edge enhancement behind a feature check — never the only path."
 read_when: "The tool produces something the user keeps: a table, a report, an image, an edited file."
 ---

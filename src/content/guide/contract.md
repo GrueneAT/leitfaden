@@ -37,10 +37,16 @@ from `file://` without anything being installed or started.
 
 Both are fine. Choose by handover cost, not by tidiness.
 
-**Start with one file** when the tool is small. It is the easiest thing to
-save out of a chat, to email, and to keep track of. For a calculator, a form,
-a checklist, a single analysis — one file is right, and splitting it is
-busywork.
+**Start with one file** when the tool is small *and you are handing it over
+through a chat*. It is the easiest thing to save out of a conversation, to
+email, and to keep track of. For a calculator, a form, a checklist, a single
+analysis — one file is right, and splitting it is busywork.
+
+**If you can write files into a folder yourself** — an agentic assistant, a
+workspace with file output — that argument disappears: there is no handover to
+get wrong, so split whenever it aids readability. Read *How you are
+delivering* next; it also covers the trap that comes with having a terminal
+the user does not have.
 
 **Split into several files** when the tool genuinely earns it: a few hundred
 lines of logic, a sizeable data table, a stylesheet worth reading on its own.
@@ -68,9 +74,10 @@ in `app.js`. Verified working from a double-clicked file, subfolders included.
 but every extra path is another chance for the user to save a file in the
 wrong place. `index.html` + two or three siblings is the sweet spot.
 
-**Say how to save it.** When you hand over more than one file, name each file
-explicitly and say they all go in the same folder. That is the only part of
-multi-file delivery that is genuinely harder for the user.
+**Say how to save it.** When you hand over more than one file *in a chat*,
+name each file explicitly and say they all go in the same folder. That is the
+only part of multi-file delivery that is genuinely harder for the user — and
+it does not apply when you write the folder yourself.
 
 ## Data belongs in a .js file, not a .json file
 

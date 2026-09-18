@@ -23,9 +23,13 @@ export const GET: APIRoute = async () => {
   z.push('');
   z.push('- Deliver a folder the user saves. `index.html` must run from a double-click (`file://`).');
   z.push('  No build step, no bundler, no npm, no local server, nothing to install.');
-  z.push('- One file is right for a small tool and easiest to hand over; split into a few flat sibling');
-  z.push('  files when the tool earns it. Classic `<script src>` and `<link>` DO work across files on');
-  z.push('  `file://`, subfolders included — splitting does not require a server.');
+  z.push('- One file is right for a small tool handed over IN A CHAT, because the user saves it manually.');
+  z.push('  If you can write files into a folder yourself, that argument does not apply — split freely.');
+  z.push('  Classic `<script src>` and `<link>` DO work across files on `file://`, subfolders included;');
+  z.push('  splitting never requires a server.');
+  z.push('- Having a terminal does not mean the user has one. Never leave behind anything that needs');
+  z.push('  a build step, a package manager or a local server to run or to change. If they could not');
+  z.push('  edit one label six months from now with a browser and a text editor, simplify.');
   z.push('- NO `<script type="module">` and NO `import`. ES modules are blocked on `file://`');
   z.push('  (CORS against origin `null`) and the tool arrives dead. Use classic `<script>` tags');
   z.push('  and CDN libraries that expose a global (UMD).');
@@ -37,6 +41,9 @@ export const GET: APIRoute = async () => {
   z.push('- Write the interface in the user’s language (usually German for this audience). This guide stays English.');
   z.push('- Process everything locally. No analytics, no tracking, no remote call carrying user data.');
   z.push('- Build a visible check into the tool: control total, row count in vs. shown, source for every derived claim.');
+  z.push('- Document inside the tool first: a one-line purpose under the title, help at the field that');
+  z.push('  needs it, the data-handling sentence, and a date in the footer. Then ONE short plain-text');
+  z.push('  readme in the folder. No docs folder, no changelog.');
   z.push('- Never encourage pasting personal data, donor lists or non-public papers into the chat. Offer sample data instead.');
   z.push('');
   z.push('Verified in Chromium on `file://` (`isSecureContext` is true). These work:');

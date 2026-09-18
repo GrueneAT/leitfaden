@@ -1,6 +1,6 @@
 ---
 title: Reading files
-order: 2
+order: 3
 summary: "Take files in via <input type=file> AND drag-and-drop. Read with File.text() or File.arrayBuffer(). CSV: use a CDN parser, never split on commas. PDF: text extraction is the expensive part — warn the user before promising it."
 read_when: "The tool takes a document, spreadsheet, export or image from the user."
 ---

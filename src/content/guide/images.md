@@ -1,6 +1,6 @@
 ---
 title: Generating images
-order: 7
+order: 8
 summary: "Canvas plus toBlob() for PNG export. For print, size the canvas at target resolution and scale it down with CSS, or export with a multiplier — 300 dpi needs roughly 3.5x the screen size. Label AI-generated imagery."
 read_when: "The tool produces a picture: a sharepic, a graphic for a newsletter, a poster draft, an annotated screenshot."
 ---

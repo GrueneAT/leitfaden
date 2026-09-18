@@ -1,6 +1,6 @@
 ---
 title: Charts
-order: 6
+order: 7
 summary: "ECharts from CDN as a global script with a pinned version. Read the palette from the design-system CSS tokens --gat-web-chart-1..8 via getComputedStyle — do NOT import gat-charts.js, it is an ES module and fails on file://. Pick the chart type from the claim, label axes, state source and date."
 read_when: "The tool visualises numbers."
 ---

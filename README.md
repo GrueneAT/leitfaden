@@ -28,8 +28,9 @@ Die erzeugten Werkzeuge sprechen die Sprache der Nutzerin, meist Deutsch.
 | `/leitfaden/llms-full.txt` | Englisch | Alle Abschnitte in einer Datei, ein Abruf |
 | `/leitfaden/guide/<name>.md` | Englisch | Ein Abschnitt als reiner Text |
 
-Elf Abschnitte, von „was überhaupt abzuliefern ist" bis GitHub Pages und
-Beispiel-Repositories ganz am Schluss.
+Dreizehn Abschnitte, von „was überhaupt abzuliefern ist" und „wie du
+lieferst" über Dokumentation bis GitHub Pages und Beispiel-Repositories ganz
+am Schluss.
 
 ## Die zentrale Vorgabe
 

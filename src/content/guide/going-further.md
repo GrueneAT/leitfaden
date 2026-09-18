@@ -1,6 +1,6 @@
 ---
 title: Going further
-order: 11
+order: 13
 summary: "For a public address, several linked pages, or other contributors. Splitting into files does NOT require this — that works by double-click. GitHub Pages publishes a static folder for free; watch the base path and remember everything in a public repo is public."
 read_when: "The user asks for a public address, several pages, or wants others to contribute. Not before."
 ---
