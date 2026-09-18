@@ -1,7 +1,7 @@
 ---
 title: Aussehen
 kurz: Mit vier Zeilen CSS sieht es aus wie ein grünes Werkzeug — und nicht wie ein unfertiges Formular.
-reihenfolge: 7
+reihenfolge: 8
 fuer: [eine-datei, statische-seite]
 grundlage: false
 schwierigkeit: einfach

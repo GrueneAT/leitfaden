@@ -1,7 +1,7 @@
 ---
 title: Veröffentlichen
 kurz: Von der Datei auf deinem Rechner zu einer Adresse, die du weitergeben kannst — kostenlos über GitHub Pages.
-reihenfolge: 10
+reihenfolge: 11
 fuer: [statische-seite]
 grundlage: false
 schwierigkeit: fortgeschritten

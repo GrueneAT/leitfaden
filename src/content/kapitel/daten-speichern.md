@@ -1,7 +1,7 @@
 ---
 title: Daten behalten
 kurz: Was zwischen zwei Besuchen erhalten bleibt — von localStorage bis zu einer vollständigen Datenbank im Browser.
-reihenfolge: 5
+reihenfolge: 6
 fuer: [datenwerkzeug]
 grundlage: false
 schwierigkeit: mittel

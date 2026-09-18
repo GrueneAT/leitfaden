@@ -1,7 +1,7 @@
 ---
 title: Wenn es größer wird
 kurz: Ab wann ein Werkzeug ein Projekt wird — Ordnerstruktur, Aufgabenzettel, Versionierung und die Übergabe an die nächste Sitzung.
-reihenfolge: 11
+reihenfolge: 12
 fuer: [statische-seite]
 grundlage: false
 schwierigkeit: fortgeschritten

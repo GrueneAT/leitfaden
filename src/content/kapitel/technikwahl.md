@@ -1,7 +1,7 @@
 ---
 title: Womit bauen
 kurz: Eine HTML-Datei, ein Seitengenerator oder ein Framework — die Entscheidung, die am meisten spätere Arbeit spart.
-reihenfolge: 3
+reihenfolge: 4
 fuer: [eine-datei, statische-seite, datenwerkzeug]
 grundlage: false
 schwierigkeit: einfach

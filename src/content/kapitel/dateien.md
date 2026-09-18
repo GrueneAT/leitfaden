@@ -1,7 +1,7 @@
 ---
 title: Dateien lesen und zurückschreiben
 kurz: PDF, CSV oder Tabelle in den Browser bekommen — und Ergebnisse als Datei wieder hinaus, bis hin zum direkten Schreiben auf die Festplatte.
-reihenfolge: 4
+reihenfolge: 5
 fuer: [datenwerkzeug]
 grundlage: false
 schwierigkeit: mittel

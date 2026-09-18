@@ -89,4 +89,6 @@ Chat — das ist kein Rückschritt, sondern die richtige Wahl.
 
 Wenn klar ist, welchen Zuschnitt dein Projekt hat, geht es weiter mit
 [Die KI anleiten](../ki-anleiten/) — dort steht, wie du die Aufgabe so
-formulierst, dass brauchbarer Code herauskommt.
+formulierst, dass brauchbarer Code herauskommt. Sobald es mehr als eine Datei
+wird, lohnt sich der Schritt zu einem eigenen Projektordner: [Lokal
+arbeiten](../lokal-arbeiten/).

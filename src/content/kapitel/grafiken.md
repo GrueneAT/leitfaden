@@ -1,7 +1,7 @@
 ---
 title: Diagramme und Bilder
 kurz: Zahlen als Diagramm, Grafiken zum Herunterladen, Sharepics fürs Gemeindeblatt — und wann keine Grafik die bessere Grafik ist.
-reihenfolge: 6
+reihenfolge: 7
 fuer: [eine-datei, datenwerkzeug]
 grundlage: false
 schwierigkeit: mittel

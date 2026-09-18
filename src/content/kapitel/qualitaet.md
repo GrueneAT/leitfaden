@@ -1,7 +1,7 @@
 ---
 title: Dass es wirklich stimmt
 kurz: Kontrollsummen, Fundstellen, Tests und Bildschirmfotos — die Prüfungen, ohne die ein Werkzeug im Sitzungssaal nicht trägt.
-reihenfolge: 8
+reihenfolge: 9
 fuer: [eine-datei, dokument]
 grundlage: false
 schwierigkeit: mittel

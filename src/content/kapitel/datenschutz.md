@@ -1,7 +1,7 @@
 ---
 title: Was hinein darf
 kurz: Welche Unterlagen in eine KI dürfen, welche nie — und warum Werkzeuge, die im Browser laufen, die Frage entschärfen.
-reihenfolge: 9
+reihenfolge: 10
 fuer: [datenwerkzeug, dokument]
 grundlage: false
 schwierigkeit: einfach
