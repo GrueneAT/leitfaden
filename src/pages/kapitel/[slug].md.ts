@@ -1,4 +1,5 @@
 import type { APIRoute, GetStaticPaths } from 'astro';
+import type { CollectionEntry } from 'astro:content';
 import { getCollection } from 'astro:content';
 
 // Rohtext-Ausgabe je Kapitel. Eine KI, die nur dieses eine Thema braucht,
@@ -13,7 +14,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const GET: APIRoute = ({ props }) => {
-  const { eintrag } = props as { eintrag: any };
+  const { eintrag } = props as { eintrag: CollectionEntry<'kapitel'> };
   const d = eintrag.data;
   const kopf = [
     `# ${d.title}`,

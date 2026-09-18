@@ -28,6 +28,9 @@ jobs:
       - name: Abhängigkeiten installieren
         run: npm ci
 
+      - name: Typen prüfen
+        run: npm run check
+
       - name: Astro-Site bauen
         run: npm run build
 

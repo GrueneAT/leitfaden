@@ -51,6 +51,7 @@ Satz entscheidet, ob eine KI das Kapitel für ihre Aufgabe auswählt.
 
 ```bash
 npm install
+npm run check     # astro check — muss fehlerfrei sein, laeuft auch in der CI
 npm run build     # erzeugt dist/, danach Pagefind-Index
 npm run dev
 ```

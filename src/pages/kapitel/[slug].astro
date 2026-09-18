@@ -1,4 +1,5 @@
 ---
+import type { CollectionEntry } from 'astro:content';
 import { getCollection, render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import { pfad, datei } from '../../lib/pfad';
@@ -17,7 +18,15 @@ export async function getStaticPaths() {
   }));
 }
 
-const { eintrag, vorher, nachher } = Astro.props;
+type Kapitel = CollectionEntry<'kapitel'>;
+
+interface Props {
+  eintrag: Kapitel;
+  vorher: Kapitel | null;
+  nachher: Kapitel | null;
+}
+
+const { eintrag, vorher, nachher } = Astro.props as Props;
 const { Content } = await render(eintrag);
 const d = eintrag.data;
 const tagKlasse =
