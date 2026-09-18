@@ -1,0 +1,39 @@
+---
+// Pagefind-Such-UI. Pagefind erzeugt das Modul erst nach `astro build` unter
+// dist/pagefind/ — im Entwicklungsserver faellt die Box deshalb bewusst
+// stumm aus, statt einen Fehler zu werfen.
+const BASE = import.meta.env.BASE_URL;
+---
+<div class="lf-suche">
+  <div id="search"></div>
+</div>
+
+<link rel="stylesheet" href={`${BASE}pagefind/pagefind-ui.css`} />
+<script type="module" is:inline define:vars={{ BASE }}>
+  async function init() {
+    const el = document.getElementById('search');
+    try {
+      const mod = await import(/* @vite-ignore */ `${BASE}pagefind/pagefind-ui.js`);
+      // pagefind-ui.js ist ein IIFE-Bundle ohne ES-Export: es setzt
+      // window.PagefindUI als Seiteneffekt.
+      const PagefindUI = window.PagefindUI || mod.PagefindUI || mod.default;
+      if (typeof PagefindUI !== 'function') throw new Error('PagefindUI nicht gefunden');
+      new PagefindUI({
+        element: '#search',
+        showImages: false,
+        showSubResults: true,
+        resetStyles: false,
+        translations: {
+          placeholder: 'Leitfaden durchsuchen …',
+          zero_results: 'Keine Treffer für "[SEARCH_TERM]"',
+          many_results: '[COUNT] Treffer für "[SEARCH_TERM]"',
+          one_result: '1 Treffer für "[SEARCH_TERM]"',
+          searching: 'Suche "[SEARCH_TERM]" …',
+        },
+      });
+    } catch (e) {
+      if (el) el.hidden = true;
+    }
+  }
+  init();
+</script>

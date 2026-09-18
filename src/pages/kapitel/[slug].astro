@@ -1,0 +1,57 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { pfad, datei } from '../../lib/pfad';
+
+export async function getStaticPaths() {
+  const kapitel = (await getCollection('kapitel')).sort(
+    (a, b) => a.data.reihenfolge - b.data.reihenfolge,
+  );
+  return kapitel.map((eintrag, i) => ({
+    params: { slug: eintrag.id },
+    props: {
+      eintrag,
+      vorher: i > 0 ? kapitel[i - 1] : null,
+      nachher: i < kapitel.length - 1 ? kapitel[i + 1] : null,
+    },
+  }));
+}
+
+const { eintrag, vorher, nachher } = Astro.props;
+const { Content } = await render(eintrag);
+const d = eintrag.data;
+const tagKlasse =
+  d.schwierigkeit === 'einfach' ? 'gat-tag--ok'
+  : d.schwierigkeit === 'mittel' ? 'gat-tag--info'
+  : 'gat-tag--warn';
+const stand = d.stand.toISOString().slice(0, 10);
+---
+<Base title={d.title} description={d.kurz} schmal={true}>
+  <p class="lf-nav-zurueck"><a href={pfad()}>&larr; Alle Kapitel</a></p>
+
+  <header class="lf-kapitel-kopf">
+    <h1>{d.title}</h1>
+    <p class="lf-kapitel-kopf__kurz">{d.kurz}</p>
+    <p class="lf-kapitel-kopf__meta">
+      <span class={`gat-tag ${tagKlasse}`}>{d.schwierigkeit}</span>
+      <span class="gat-tag gat-tag--neutral">Kapitel {d.reihenfolge}</span>
+      <span class="gat-tag gat-tag--neutral">Stand {stand}</span>
+      <a class="lf-rohtext" href={datei('kapitel', `${eintrag.id}.md`)}>
+        Rohtext (.md) für KI
+      </a>
+    </p>
+  </header>
+
+  <article class="lf-kapitel">
+    <Content />
+  </article>
+
+  <nav class="lf-weiter" aria-label="Kapitelnavigation">
+    <span>
+      {vorher && <a href={pfad('kapitel', vorher.id)}>&larr; {vorher.data.title}</a>}
+    </span>
+    <span>
+      {nachher && <a href={pfad('kapitel', nachher.id)}>{nachher.data.title} &rarr;</a>}
+    </span>
+  </nav>
+</Base>
