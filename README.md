@@ -1,66 +1,81 @@
-# Leitfaden — eigene Werkzeuge bauen
+# Leitfaden — eigene Werkzeuge bauen / Build your own tools
 
-Leitfaden für Gemeinderätinnen, Gemeinderäte und lokale Gruppen, die mit einer
-KI-Assistenz ein eigenes kleines Web-Werkzeug bauen wollen: einen Rechner für
-die nächste Sitzung, eine Auswertung eines Voranschlags, eine kleine Website.
+Kurze Erklärung auf **Deutsch und Englisch**, dazu ein **englischer Leitfaden
+für KI-Assistenzen**, der beschreibt, wie ein kleines Werkzeug für Leute ohne
+Entwicklungsumgebung gebaut sein muss.
 
 **Live:** https://grueneat.github.io/leitfaden/
 
-Der Leitfaden hat zwei Zielgruppen:
+## Die Idee
 
-- **Menschen** — die Website erklärt, was sich zu bauen lohnt und wie man
-  anfängt.
-- **KI-Assistenzen** — man kann eine KI auf diesen Leitfaden verweisen, sie
-  liest `llms.txt`, holt sich die passenden Kapitel und hält sich an die
-  Vorgaben.
+Jemand mit einem Browser und einem KI-Chat — kein Terminal, kein Editor, kein
+Paketmanager — kopiert einen Absatz in den Chat, beschreibt sein Problem und
+bekommt **eine einzige HTML-Datei**, die per Doppelklick läuft. Der Absatz
+verweist die KI auf `llms.txt`; dort und in den verlinkten Abschnitten stehen
+die Vorgaben.
 
-## Maschinenlesbare Schnittstelle
+Der Leitfaden ist bewusst **englisch**: Modelle folgen ihm dann zuverlässiger.
+Die erzeugten Werkzeuge sprechen die Sprache der Nutzerin, meist Deutsch.
 
-| Adresse | Inhalt |
-| --- | --- |
-| `/leitfaden/llms.txt` | Übersicht aller Kapitel, eine Zeile Zusammenfassung je Kapitel |
-| `/leitfaden/kapitel/<name>.md` | Ein Kapitel als reiner Markdown-Text |
-| `/leitfaden/kapitel/<name>/` | Dasselbe Kapitel als Webseite |
-| `/leitfaden/fuer-ki/` | Textbausteine zum Kopieren (Prompt, Projektregeln) |
+## Aufbau
+
+| Adresse | Sprache | Für wen |
+| --- | --- | --- |
+| `/leitfaden/` | Deutsch | Menschen — kurze Erklärung, Absatz zum Kopieren |
+| `/leitfaden/en/` | Englisch | Menschen — dasselbe |
+| `/leitfaden/guide/` | Englisch | Der Leitfaden, lesbar gerendert |
+| `/leitfaden/llms.txt` | Englisch | **Einstieg für KIs** — Kernregeln plus Abschnittsindex |
+| `/leitfaden/llms-full.txt` | Englisch | Alle Abschnitte in einer Datei, ein Abruf |
+| `/leitfaden/guide/<name>.md` | Englisch | Ein Abschnitt als reiner Text |
+
+Elf Abschnitte, von „was überhaupt abzuliefern ist" bis GitHub Pages und
+Beispiel-Repositories ganz am Schluss.
+
+## Die zentrale Vorgabe
+
+Eine einzige `.html`-Datei, die per Doppelklick läuft. Kein Build, kein Server,
+keine Installation, **keine ES-Module** (`import` scheitert auf `file://` und
+das Werkzeug kommt tot an). Klassische `<script>`-Tags, Bibliotheken per CDN
+als Global mit fester Version.
+
+Auf `file://` geprüft und funktionsfähig: `isSecureContext` ist `true`,
+localStorage, IndexedDB, File System Access API, Canvas-Export, Zwischenablage
+und CDN-Ressourcen inklusive Design-System-CSS.
 
 ## Stack
 
 - **Astro 5** mit Content Collections (Schema in `src/content.config.ts`)
-- **Design-System** als externes Stylesheet von
-  `https://design-system.gruene.at/design-system.css` — kein Vendoring
-- **Pagefind** für clientseitige Volltextsuche über `dist/`
-- **GitHub Pages** als Hosting, Unterordner-Adresse (`base: '/leitfaden'`)
+- **Design-System** extern von `https://design-system.gruene.at/design-system.css`
+- **Pagefind** als Postbuild-Schritt
+- **GitHub Pages**, `base: '/leitfaden'`
 
 ## Lokal bauen
 
 ```bash
 npm install
-npm run dev      # Entwicklungsserver
-npm run build    # erzeugt dist/ und indiziert es mit Pagefind
+npm run check    # astro check, muss fehlerfrei sein
+npm run build    # erzeugt dist/ und indiziert es
+npm run dev
 ```
 
-## Ein Kapitel ergänzen oder ändern
+## Einen Abschnitt ergänzen
 
-Ein Kapitel = eine Markdown-Datei unter `src/content/kapitel/<name>.md`:
+Ein Abschnitt = eine Markdown-Datei unter `src/content/guide/<name>.md`,
+**auf Englisch**:
 
 ```yaml
 ---
-title: Dateien lesen und zurückschreiben
-kurz: Ein bis zwei Sätze, erscheinen auf der Kapitelkarte.
-reihenfolge: 4
-fuer: [eine-datei, datenwerkzeug]     # IDs aus src/lib/projekttypen.ts
-schwierigkeit: mittel                 # einfach | mittel | fortgeschritten
-fuer_ki: "Ein Satz, den eine KI als Zusammenfassung übernehmen kann."
-stand: 2026-09-18
+title: Reading files
+order: 2
+summary: "Was drinsteht — landet in llms.txt und entscheidet, ob eine KI den Abschnitt holt."
+read_when: "Wann dieser Abschnitt zählt. Eine Zeile."
 ---
 ```
 
-`fuer_ki` ist keine Zierde — der Satz landet in `llms.txt` und entscheidet,
-ob eine KI dieses Kapitel für ihre Aufgabe holt. Er soll benennen, welche
-konkreten Vorgaben im Kapitel stehen, nicht welches Thema es behandelt.
+`summary` und `read_when` sind keine Zierde: Sie sind das, was eine KI sieht,
+bevor sie entscheidet, ob sie den Abschnitt abruft.
 
-Interne Links im Markdown relativ setzen (`../dateien/`, `../../fuer-ki/`) —
-die Site liegt unter einem `base`-Pfad, absolute Pfade zeigen ins Leere.
+Interne Links relativ setzen — die Site liegt unter einem `base`-Pfad.
 
 ## Lizenz
 

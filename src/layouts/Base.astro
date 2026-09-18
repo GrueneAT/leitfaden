@@ -5,43 +5,56 @@ import { pfad, datei } from '../lib/pfad';
 interface Props {
   title: string;
   description?: string;
+  lang?: 'de' | 'en';
   schmal?: boolean;
 }
 
-const { title, description, schmal = false } = Astro.props as Props;
-const istStart = title === 'Leitfaden';
-const fullTitle = istStart ? 'Leitfaden — eigene Werkzeuge bauen' : `${title} — Leitfaden`;
-const desc =
-  description ??
-  'Leitfaden fuer eigene kleine Web-Werkzeuge: was sich zu bauen lohnt, wie man es mit einer KI baut und wie man es veroeffentlicht.';
+const { title, description, lang = 'de', schmal = false } = Astro.props as Props;
+const en = lang === 'en';
+const fullTitle = title === 'Leitfaden' || title === 'Build your own tools'
+  ? (en ? 'Build your own tools' : 'Eigene Werkzeuge bauen')
+  : `${title} — ${en ? 'Build guide' : 'Leitfaden'}`;
+const desc = description ?? (en
+  ? 'Build small tools by chatting with an AI. One HTML file, runs on your laptop, your data stays there.'
+  : 'Eigene kleine Werkzeuge im Gespräch mit einer KI bauen. Eine HTML-Datei, läuft am eigenen Laptop, die Daten bleiben dort.');
+
+const nav = en
+  ? [
+      { href: pfad('en'), label: 'Start' },
+      { href: pfad('guide'), label: 'Build guide' },
+      { href: pfad(), label: 'Deutsch' },
+    ]
+  : [
+      { href: pfad(), label: 'Start' },
+      { href: pfad('guide'), label: 'Leitfaden für die KI' },
+      { href: pfad('en'), label: 'English' },
+    ];
 ---
 <!doctype html>
-<html lang="de">
+<html lang={lang}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#005538" />
+    <meta name="theme-color" content="#257639" />
     <title>{fullTitle}</title>
     <meta name="description" content={desc} />
     <link rel="icon" type="image/svg+xml" href="https://design-system.gruene.at/assets/gruene-logo.svg" />
     <link rel="stylesheet" href="https://design-system.gruene.at/design-system.css" />
-    <link rel="alternate" type="text/plain" href={datei('llms.txt')} title="Maschinenlesbare Uebersicht (llms.txt)" />
+    <link rel="alternate" type="text/plain" href={datei('llms.txt')} title="llms.txt" />
   </head>
   <body>
-    <a class="gat-skiplink" href="#main">Zum Hauptinhalt springen</a>
+    <a class="gat-skiplink" href="#main">{en ? 'Skip to content' : 'Zum Hauptinhalt springen'}</a>
     <header class="gat-header">
       <div class="gat-header__inner">
-        <a class="gat-header__brand" href={pfad()}>
+        <a class="gat-header__brand" href={en ? pfad('en') : pfad()}>
           <img class="gat-header__logo"
                src="https://design-system.gruene.at/assets/gruene-logo.svg"
                alt="Die Grünen" />
-          <span class="gat-header__wordmark">Leitfaden</span>
+          <span class="gat-header__wordmark">{en ? 'Build your own tools' : 'Eigene Werkzeuge'}</span>
         </a>
-        <nav class="gat-header__nav" aria-label="Hauptnavigation">
+        <nav class="gat-header__nav" aria-label={en ? 'Main navigation' : 'Hauptnavigation'}>
           <ul class="gat-header__nav-list">
-            <li><a href={pfad() + '#projekttypen'}>Was baue ich?</a></li>
-            <li><a href={pfad() + '#kapitel'}>Kapitel</a></li>
-            <li><a href={pfad('fuer-ki')}>Für die KI</a></li>
+            {nav.map((n) => <li><a href={n.href}>{n.label}</a></li>)}
           </ul>
         </nav>
       </div>
@@ -51,12 +64,13 @@ const desc =
     </main>
     <footer class="lf-footer">
       <p>
-        Leitfaden für eigene Werkzeuge · Die Grünen ·
-        <a href="https://github.com/GrueneAT/leitfaden">Quellcode und Issues auf GitHub</a>
+        {en ? 'Die Grünen · ' : 'Die Grünen · '}
+        <a href="https://github.com/GrueneAT/leitfaden">{en ? 'Source and issues on GitHub' : 'Quellcode und Issues auf GitHub'}</a>
       </p>
       <p>
-        Maschinenlesbar: <a href={datei('llms.txt')}>llms.txt</a> ·
-        Werkzeug-Verzeichnis: <a href="https://werkzeuge.gruene.at/">werkzeuge.gruene.at</a>
+        <a href={datei('llms.txt')}>llms.txt</a> ·
+        <a href={datei('llms-full.txt')}>llms-full.txt</a> ·
+        <a href="https://werkzeuge.gruene.at/">werkzeuge.gruene.at</a>
       </p>
     </footer>
   </body>

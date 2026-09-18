@@ -1,51 +1,68 @@
 # CLAUDE.md — Leitfaden
 
-Statische Astro-Site: Leitfaden für den Bau kleiner Web-Werkzeuge mit
-KI-Assistenz. Zielgruppe sind Gemeinderätinnen, Gemeinderäte und lokale
-Gruppen ohne Programmierkenntnisse.
+Statische Astro-Site. Zwei Dinge in einem Repo:
 
-Live: https://grueneat.github.io/leitfaden/ — bewusst unter der
-Organisationsadresse, **keine eigene gruene.at-Domain**.
+1. Eine **kurze Erklärung auf Deutsch und Englisch** für Menschen ohne
+   Programmierkenntnisse.
+2. Ein **englischer Leitfaden für KI-Assistenzen**, der vorgibt, wie ein
+   kleines Werkzeug gebaut sein muss.
 
-## Die Besonderheit dieses Repos
+Live: https://grueneat.github.io/leitfaden/ — Organisationsadresse, **keine
+eigene gruene.at-Domain**.
 
-Der Leitfaden hat zwei Leserschaften, und die maschinelle ist gleichrangig:
-`llms.txt` und die `.md`-Rohtexte je Kapitel sind **Produkt, nicht Beiwerk**.
-Wer ein Kapitel ändert, prüft, ob `fuer_ki` im Frontmatter noch stimmt — dieser
-Satz entscheidet, ob eine KI das Kapitel für ihre Aufgabe auswählt.
+## Die zwei Regeln, die alles andere bestimmen
+
+**Erstens: Sprache ist keine Geschmacksfrage.** Die Erklärungsseiten gibt es
+auf Deutsch und Englisch. Der Leitfaden selbst (`src/content/guide/`,
+`llms.txt`, `llms-full.txt`) ist **ausschließlich englisch** — Modelle folgen
+ihm dann zuverlässiger. Keine deutschen Abschnitte anlegen.
+
+**Zweitens: Die Zielgruppe hat keine Entwicklungsumgebung.** Kein Terminal,
+kein Editor, kein npm, keine Adminrechte. Alles, was im Leitfaden steht, muss
+ohne all das funktionieren. Die Standard-Auslieferung ist **eine einzige
+HTML-Datei, die per Doppelklick läuft**.
+
+Daraus folgt für Inhalte: keine ES-Module, kein Build-Schritt, kein lokaler
+Server im Hauptpfad. `npx`, Editor-Empfehlungen und Mehrdateiprojekte gehören
+ausschließlich in den letzten Abschnitt (`going-further`) und sind dort
+ausdrücklich als Ausnahme gekennzeichnet.
+
+## Geprüfte Grundlage
+
+Auf `file://` in Chromium nachgemessen (nicht aus dem Gedächtnis):
+`isSecureContext: true`; localStorage, IndexedDB, `showOpenFilePicker`,
+`showSaveFilePicker`, `showDirectoryPicker`, Canvas-`toBlob`, Clipboard und
+CDN-Ressourcen sind verfügbar. ECharts lädt als globales Script, die
+`--gat-web-chart-*`-Tokens sind per `getComputedStyle` lesbar.
+**Nicht** verfügbar: ES-Module, `fetch()` auf Nachbardateien.
+
+Wer diese Aussagen ändert, misst nach.
 
 ## Stack
 
-- **Astro 5**, Content Collections, Schema in `src/content.config.ts`
-- **npm** als Package-Manager
-- **Design-System** extern: `https://design-system.gruene.at/design-system.css`
-- **Pagefind** als Postbuild-Schritt
-- **GitHub Pages**, `base: '/leitfaden'`
+- **Astro 5**, Content Collection `guide`, Schema in `src/content.config.ts`
+- **npm**, **Pagefind** als Postbuild, **GitHub Pages** mit `base: '/leitfaden'`
+- Design-System extern: `https://design-system.gruene.at/design-system.css`
 
 ## Konventionen
 
 - **Kein Vendoring.** Design-System, Schriften, Bibliotheken bleiben extern.
-  Das gilt auch dann, wenn es nur eine kleine Datei wäre.
-- **base-Pfad beachten.** Interne Links in Astro-Dateien über
-  `src/lib/pfad.ts`, in Markdown relativ. Nie mit `/` beginnend.
-- **Inhalt auf Deutsch**, Bezeichner im Code englisch.
+- **base-Pfad beachten.** Interne Links über `src/lib/pfad.ts`, in Markdown
+  relativ. Nie mit `/` beginnend.
 - **Keine Werkzeug-Attribution** in Commits, Code oder Kommentaren.
 - **Conventional Commits**: `feat:`, `fix:`, `docs:`, `chore:`.
-- **Belegbarkeit.** Behauptungen über Technik gehören belegt — aus den
-  bestehenden Repos (`gemeindefinanzen`, `Gemeindeordnung`, `bildgenerator`,
-  `personenwahl`, `vorlagen`, `werkzeuge`) oder aus der Doku. Der Leitfaden
-  verlangt von seinen Leserinnen Fundstellen; er hält sich selbst daran.
+- **Belegbarkeit.** Technische Behauptungen im Leitfaden gehören belegt — aus
+  den bestehenden Repos (`gemeindefinanzen`, `Gemeindeordnung`,
+  `bildgenerator`, `Personenwahl`, `werkzeuge`) oder nachgemessen.
 
-## Inhaltliche Leitplanken
+## Ton
 
-- **Ton:** sachlich, ohne Technikjubel. Die Leserin hat abends zwei Stunden
-  und kein Personal.
-- **Immer den billigeren Weg zuerst.** Wenn eine Aufgabe keinen Code braucht,
-  steht das im Kapitel.
-- **Grenzen nennen.** Wo eine Technik nur in Chromium läuft, wo Daten verloren
-  gehen, wo die KI falsch rechnet — das gehört ins Kapitel, nicht weggelassen.
-- **Ein Kapitel = ein Umfang, den man allein lesen kann.** Querverweise statt
-  Wiederholung; niemand soll mehr als drei Kapitel für eine Aufgabe brauchen.
+Sachlich, kurz, ohne Technikjubel. Die Erklärungsseiten sind bewusst knapp —
+wer dort Absätze hinzufügt, muss begründen, warum sie nicht in den Leitfaden
+gehören. Der Leitfaden selbst darf dicht sein: ihn liest eine Maschine.
+
+Grenzen werden genannt, nicht weggelassen: wo etwas nur in Chromium läuft, wo
+Daten verlorengehen, wo die KI falsch rechnet.
 
 ## Lokales Bauen
 

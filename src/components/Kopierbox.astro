@@ -1,0 +1,49 @@
+---
+// Der Absatz, den die Nutzerin in den Chat kopiert. Das ist die meistbenutzte
+// Stelle der Seite — deshalb ein echter Kopierknopf statt Markieren-und-Ziehen.
+interface Props {
+  text: string;
+  titel: string;
+  knopf: string;
+  erfolg: string;
+}
+const { text, titel, knopf, erfolg } = Astro.props as Props;
+---
+<div class="lf-kopierbox">
+  <div class="lf-kopierbox__kopf">
+    <p class="lf-kopierbox__titel">{titel}</p>
+    <button class="gat-btn gat-btn--secondary lf-kopierbox__knopf"
+            type="button"
+            data-kopiertext={text}
+            data-erfolg={erfolg}>{knopf}</button>
+  </div>
+  <pre>{text}</pre>
+  <slot />
+</div>
+
+<script>
+  document.querySelectorAll('.lf-kopierbox__knopf').forEach((el) => {
+    const knopf = el as HTMLButtonElement;
+    const urspruenglich = knopf.textContent;
+    knopf.addEventListener('click', async () => {
+      const text = knopf.dataset.kopiertext ?? '';
+      try {
+        await navigator.clipboard.writeText(text);
+      } catch {
+        // Aeltere Browser und blockierte Zwischenablage: Text markieren,
+        // damit Strg+C weiterhin funktioniert.
+        const pre = knopf.closest('.lf-kopierbox')?.querySelector('pre');
+        if (pre) {
+          const r = document.createRange();
+          r.selectNodeContents(pre);
+          const sel = window.getSelection();
+          sel?.removeAllRanges();
+          sel?.addRange(r);
+        }
+        return;
+      }
+      knopf.textContent = knopf.dataset.erfolg ?? 'OK';
+      setTimeout(() => { knopf.textContent = urspruenglich; }, 2000);
+    });
+  });
+</script>

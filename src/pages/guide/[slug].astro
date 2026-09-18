@@ -1,0 +1,51 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { pfad, datei } from '../../lib/pfad';
+
+export async function getStaticPaths() {
+  const abschnitte = (await getCollection('guide')).sort((a, b) => a.data.order - b.data.order);
+  return abschnitte.map((eintrag, i) => ({
+    params: { slug: eintrag.id },
+    props: {
+      eintrag,
+      vorher: i > 0 ? abschnitte[i - 1] : null,
+      nachher: i < abschnitte.length - 1 ? abschnitte[i + 1] : null,
+    },
+  }));
+}
+
+type Abschnitt = CollectionEntry<'guide'>;
+
+interface Props {
+  eintrag: Abschnitt;
+  vorher: Abschnitt | null;
+  nachher: Abschnitt | null;
+}
+
+const { eintrag, vorher, nachher } = Astro.props as Props;
+const { Content } = await render(eintrag);
+const d = eintrag.data;
+---
+<Base title={d.title} lang="en" description={d.summary} schmal={true}>
+  <p class="lf-nav-zurueck"><a href={pfad('guide')}>&larr; Build guide</a></p>
+
+  <header class="lf-kapitel-kopf">
+    <h1>{d.title}</h1>
+    <p class="lf-kapitel-kopf__kurz">{d.read_when}</p>
+    <p class="lf-kapitel-kopf__meta">
+      <span class="gat-tag gat-tag--neutral">Section {d.order}</span>
+      <a class="lf-rohtext" href={datei('guide', `${eintrag.id}.md`)}>Plain text (.md)</a>
+    </p>
+  </header>
+
+  <article class="lf-kapitel">
+    <Content />
+  </article>
+
+  <nav class="lf-weiter" aria-label="Section navigation">
+    <span>{vorher && <a href={pfad('guide', vorher.id)}>&larr; {vorher.data.title}</a>}</span>
+    <span>{nachher && <a href={pfad('guide', nachher.id)}>{nachher.data.title} &rarr;</a>}</span>
+  </nav>
+</Base>

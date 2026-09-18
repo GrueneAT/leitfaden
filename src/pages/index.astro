@@ -1,157 +1,106 @@
 ---
-import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
-import KapitelKarte from '../components/KapitelKarte.astro';
-import Suche from '../components/Suche.astro';
-import { PROJEKTTYPEN } from '../lib/projekttypen';
-import { pfad, datei } from '../lib/pfad';
+import Kopierbox from '../components/Kopierbox.astro';
+import { pfad } from '../lib/pfad';
 
-const kapitel = (await getCollection('kapitel')).sort(
-  (a, b) => a.data.reihenfolge - b.data.reihenfolge,
-);
+const prompt = `Follow the build guide at
+https://grueneat.github.io/leitfaden/llms.txt
+before you write any code.
 
-const grundlagen = kapitel.filter((k) => k.data.grundlage);
+Give me one self-contained HTML file that I
+can save and open by double-clicking — no
+installation, no server, no terminal.
+Write the interface in German.
 
-function kapitelFuer(typId: string) {
-  return kapitel.filter((k) => !k.data.grundlage && k.data.fuer.includes(typId));
-}
+What I need:`;
 ---
-<Base title="Leitfaden">
+<Base title="Leitfaden" lang="de" schmal={true}>
   <section class="lf-hero">
     <h1>Bau dir dein Werkzeug</h1>
     <p class="lf-hero__lead">
-      Ein Leitfaden für alle, die mit einer KI-Assistenz etwas Eigenes bauen
-      wollen: einen Rechner für die nächste Sitzung, eine Auswertung eines
-      Voranschlags, eine kleine Website für die Gruppe. Kein Server, kein
-      Budget, keine Vorkenntnisse in Programmierung.
+      Du kannst dir im Gespräch mit einer KI ein eigenes kleines Werkzeug bauen
+      lassen — einen Rechner, eine Auswertung, eine Checkliste. Heraus kommt
+      <strong>eine einzige Datei</strong>. Du speicherst sie, klickst sie
+      doppelt an, fertig. Keine Installation, kein Konto, kein Server.
+      Deine Daten bleiben auf deinem Gerät.
     </p>
   </section>
 
-  <section class="gat-callout gat-callout--info" style="margin-top:1.5rem">
-    <p class="gat-callout__lead">Du bist eine KI und sollst hier Vorgaben holen?</p>
-    <p>
-      Die maschinenlesbare Übersicht steht unter <a href={datei('llms.txt')}><code>llms.txt</code></a>.
-      Jedes Kapitel gibt es zusätzlich als reinen Text unter seiner Adresse mit
-      <code>.md</code> am Ende. Details auf der Seite
-      <a href={pfad('fuer-ki')}>Für die KI</a>.
+  <section class="lf-section">
+    <h2>So geht es</h2>
+    <ol class="lf-schritte">
+      <li>Einen KI-Chat öffnen, der Webseiten lesen kann.</li>
+      <li>Den Absatz unten hineinkopieren.</li>
+      <li>Dahinter schreiben, was du brauchst — in normalen Worten.</li>
+      <li>Die Datei speichern und doppelklicken.</li>
+    </ol>
+
+    <Kopierbox text={prompt} titel="Das hineinkopieren:" knopf="Kopieren" erfolg="Kopiert">
+      <p class="lf-kopierbox__fuss">
+        Der Absatz ist auf Englisch — das ist Absicht. Er verweist die KI auf
+        den <a href={pfad('guide')}>Leitfaden</a>, in dem steht, wie so ein
+        Werkzeug gebaut sein muss. Deine Beschreibung dahinter und die fertige
+        Oberfläche sind auf Deutsch.
+      </p>
+    </Kopierbox>
+  </section>
+
+  <section class="lf-section">
+    <h2>Beispiele</h2>
+    <ul class="lf-beispiele">
+      <li>„Rechne mir vier Varianten für die Abgeltung an Nachbargemeinden durch, mit Kontrollsumme."</li>
+      <li>„Lies diese Teilnehmerliste als CSV ein und zeig mir die Auswertung nach Ortsteilen."</li>
+      <li>„Eine Checkliste für die Sitzungsvorbereitung, die sich merkt, was ich abgehakt habe."</li>
+      <li>„Ein Formular, aus dem am Ende ein fertiger Antragstext zum Kopieren herauskommt."</li>
+      <li>„Ein Bild im Vereinslayout mit Titel, Datum und Ort, zum Herunterladen."</li>
+    </ul>
+    <p class="lf-hinweis">
+      Wenn eine Aufgabe nur einmal vorkommt, brauchst du kein Werkzeug — dann
+      ist die Antwort im Chat schneller. Werkzeuge lohnen sich, wenn etwas
+      wiederkommt oder wenn das Ergebnis nachvollziehbar sein muss.
     </p>
   </section>
 
-  <section class="lf-section" id="worum">
-    <h2>Worum es geht</h2>
-    <p class="lf-section__hint">
-      Gemeinderätinnen und Gemeinderäte bekommen Unterlagen, die niemand für sie
-      geschrieben hat: Voranschläge über hunderte Seiten, Gutachten,
-      Beschaffungslisten. Zeit gibt es abends, Personal gibt es keines.
-    </p>
-    <p>
-      Mit einer KI-Assistenz lässt sich in einer Stunde ein Werkzeug bauen, das
-      genau die eine Aufgabe erledigt, die immer wiederkommt — und das danach
-      jedes Jahr wieder funktioniert. Die Werkzeuge der Grünen Österreich sind
-      alle so entstanden. Dieser Leitfaden schreibt auf, was dabei
-      funktioniert hat und was nicht, damit die nächste Person nicht wieder
-      bei null anfängt.
-    </p>
-    <p>
-      Alles hier folgt einem Grundsatz: <strong>die Daten bleiben auf deinem
-      Gerät.</strong> Die Werkzeuge laufen im Browser, ohne Server, ohne Konto.
-      Das ist nicht nur bequemer, es ist der Grund, warum man sie mit echten
-      Unterlagen überhaupt benutzen darf.
-    </p>
-  </section>
-
-  <section class="lf-section" id="projekttypen">
-    <h2>Was baust du?</h2>
-    <p class="lf-section__hint">
-      Vier Zuschnitte. Der ehrlichste ist oft der letzte — nicht jede Aufgabe
-      braucht ein Werkzeug. Such dir den passenden; darunter stehen nur die
-      Kapitel, die dafür wirklich nötig sind.
-    </p>
-    <p class="lf-section__hint">
-      <strong>Für alle vier gilt zuerst:</strong>{' '}
-      {grundlagen.map((k, i) => (<>{i > 0 && ' und '}<a href={pfad('kapitel', k.id)}>{k.data.title}</a></>))}.
-      Alles Weitere hängt vom Zuschnitt ab.
-    </p>
-
-    <div class="lf-grid" style="grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));">
-      {PROJEKTTYPEN.map((typ) => (
-        <div class="lf-typ" id={typ.id}>
-          <h3>{typ.name}</h3>
-          <p class="lf-typ__einzeiler">{typ.einzeiler}</p>
-          <dl>
-            <dt>Wann</dt><dd>{typ.wann}</dd>
-            <dt>Aufwand</dt><dd>{typ.aufwand}</dd>
-            <dt>Beispiel</dt><dd>{typ.beispiel}</dd>
-            <dt>Dazu lesen</dt>
-            <dd>
-              {kapitelFuer(typ.id).map((k, i) => (
-                <>
-                  {i > 0 && ' · '}
-                  <a href={pfad('kapitel', k.id)}>{k.data.title}</a>
-                </>
-              ))}
-            </dd>
-          </dl>
-        </div>
-      ))}
+  <section class="lf-section">
+    <h2>Was hier noch steht</h2>
+    <div class="lf-grid">
+      <a class="lf-karte" href={pfad('guide')}>
+        <span class="lf-karte__titel">Der Leitfaden für die KI</span>
+        <p class="lf-karte__kurz">
+          Die eigentlichen Vorgaben — auf Englisch, weil KI-Modelle damit
+          zuverlässiger arbeiten. Du musst ihn nicht lesen; die KI holt ihn
+          sich selbst. Nachschauen kannst du trotzdem.
+        </p>
+      </a>
+      <a class="lf-karte" href={pfad('guide', 'going-further')}>
+        <span class="lf-karte__titel">Wenn eine Datei nicht reicht</span>
+        <p class="lf-karte__kurz">
+          Für später: mehrere Seiten, eine eigene Adresse über GitHub Pages,
+          und Beispiel-Repositories von Werkzeugen, die genau so gebaut sind.
+        </p>
+      </a>
     </div>
   </section>
 
-  <section class="lf-section" id="kapitel">
-    <h2>Alle Kapitel</h2>
-    <p class="lf-section__hint">
-      In sinnvoller Reihenfolge, aber einzeln lesbar. Jedes Kapitel ist so
-      geschnitten, dass es allein genügt — für dich und für eine KI, die nur
-      dieses eine Thema braucht.
-    </p>
-    <Suche />
-    <div class="lf-grid">
-      {kapitel.map((k) => (
-        <KapitelKarte
-          id={k.id}
-          title={k.data.title}
-          kurz={k.data.kurz}
-          nummer={k.data.reihenfolge}
-          schwierigkeit={k.data.schwierigkeit}
-        />
-      ))}
+  <section class="lf-section">
+    <h2>Zwei Dinge vorweg</h2>
+    <div class="gat-callout gat-callout--warn">
+      <p class="gat-callout__lead">Was nicht in den Chat gehört</p>
+      <p>
+        Namen mit Adressen, Geburtsdaten, IBANs, Spender- und Mitgliederlisten,
+        vertrauliche Unterlagen. Beschreib stattdessen den Aufbau („eine
+        Tabelle mit den Spalten Name, Ortsteil, Betrag"), lass das Werkzeug
+        damit bauen und die echte Datei erst im fertigen Werkzeug öffnen —
+        die verlässt dein Gerät nicht.
+      </p>
     </div>
-  </section>
-
-  <section class="lf-section" id="beispiele">
-    <h2>Was damit schon gebaut wurde</h2>
-    <p class="lf-section__hint">
-      Alle offen, alle kostenlos nachnutzbar, alle im Browser laufend.
-      Vollständiges Verzeichnis: <a href="https://werkzeuge.gruene.at/">werkzeuge.gruene.at</a>.
-    </p>
-    <div class="lf-grid">
-      <a class="lf-karte" href="https://gemeindefinanzen.gruene.at/">
-        <span class="lf-karte__titel">Gemeindefinanzen</span>
-        <p class="lf-karte__kurz">
-          Voranschlag als PDF hineinziehen, Dashboard heraus. Mehrjahresvergleich
-          bis auf den einzelnen Posten.
-        </p>
-      </a>
-      <a class="lf-karte" href="https://gemeindeordnung.gruene.at/">
-        <span class="lf-karte__titel">Gemeindeordnung</span>
-        <p class="lf-karte__kurz">
-          Durchsuchbares Gemeinderecht aller Bundesländer, mit Erklärungen in
-          Alltagssprache neben dem Paragrafen.
-        </p>
-      </a>
-      <a class="lf-karte" href="https://bildgenerator.gruene.at/">
-        <span class="lf-karte__titel">Bildgenerator</span>
-        <p class="lf-karte__kurz">
-          Sharepics und Druckvorlagen im Corporate Design, ohne Grafikprogramm.
-        </p>
-      </a>
-      <a class="lf-karte" href="https://personenwahl.gruene.at/">
-        <span class="lf-karte__titel">Personenauswahl</span>
-        <p class="lf-karte__kurz">
-          Stratifizierte Zufallsauswahl für Bürger:innenräte — die Daten
-          verlassen den Browser nie.
-        </p>
-      </a>
+    <div class="gat-callout gat-callout--info">
+      <p class="gat-callout__lead">Nachrechnen bleibt bei dir</p>
+      <p>
+        Eine KI rechnet, du weißt Bescheid. Prüf eine Summe, die du kennst, und
+        ob etwas fehlt, das da sein müsste. Bitte die KI ausdrücklich um eine
+        Kontrollsumme und darum, zu zeigen, wie viele Zeilen sie gelesen hat.
+      </p>
     </div>
   </section>
 </Base>

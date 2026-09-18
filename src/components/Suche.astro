@@ -2,6 +2,16 @@
 // Pagefind-Such-UI. Pagefind erzeugt das Modul erst nach `astro build` unter
 // dist/pagefind/ — im Entwicklungsserver faellt die Box deshalb bewusst
 // stumm aus, statt einen Fehler zu werfen.
+interface Props { lang?: 'de' | 'en' }
+const { lang = 'de' } = Astro.props as Props;
+const en = lang === 'en';
+const t = en
+  ? { placeholder: 'Search the guide …', zero: 'No results for "[SEARCH_TERM]"',
+      many: '[COUNT] results for "[SEARCH_TERM]"', one: '1 result for "[SEARCH_TERM]"',
+      searching: 'Searching "[SEARCH_TERM]" …' }
+  : { placeholder: 'Leitfaden durchsuchen …', zero: 'Keine Treffer für "[SEARCH_TERM]"',
+      many: '[COUNT] Treffer für "[SEARCH_TERM]"', one: '1 Treffer für "[SEARCH_TERM]"',
+      searching: 'Suche "[SEARCH_TERM]" …' };
 const BASE = import.meta.env.BASE_URL;
 ---
 <div class="lf-suche">
@@ -9,7 +19,7 @@ const BASE = import.meta.env.BASE_URL;
 </div>
 
 <link rel="stylesheet" href={`${BASE}pagefind/pagefind-ui.css`} />
-<script type="module" is:inline define:vars={{ BASE }}>
+<script type="module" is:inline define:vars={{ BASE, t }}>
   async function init() {
     const el = document.getElementById('search');
     try {
@@ -24,11 +34,11 @@ const BASE = import.meta.env.BASE_URL;
         showSubResults: true,
         resetStyles: false,
         translations: {
-          placeholder: 'Leitfaden durchsuchen …',
-          zero_results: 'Keine Treffer für "[SEARCH_TERM]"',
-          many_results: '[COUNT] Treffer für "[SEARCH_TERM]"',
-          one_result: '1 Treffer für "[SEARCH_TERM]"',
-          searching: 'Suche "[SEARCH_TERM]" …',
+          placeholder: t.placeholder,
+          zero_results: t.zero,
+          many_results: t.many,
+          one_result: t.one,
+          searching: t.searching,
         },
       });
     } catch (e) {

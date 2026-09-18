@@ -1,83 +1,63 @@
 import type { APIRoute } from 'astro';
 import { getCollection } from 'astro:content';
-import { PROJEKTTYPEN } from '../lib/projekttypen';
 
 const BASIS = 'https://grueneat.github.io/leitfaden';
 
-// Maschinenlesbarer Einstieg nach der llms.txt-Konvention. Eine KI, die auf
-// diesen Leitfaden verwiesen wird, liest zuerst diese Datei und holt sich
-// daraus gezielt die ein bis drei Kapitel, die zur Aufgabe passen.
+// Entry point for AI assistants, per the llms.txt convention. English on
+// purpose. Kept short: the core constraints inline, everything else linked.
 export const GET: APIRoute = async () => {
-  const kapitel = (await getCollection('kapitel')).sort(
-    (a, b) => a.data.reihenfolge - b.data.reihenfolge,
-  );
+  const abschnitte = (await getCollection('guide')).sort((a, b) => a.data.order - b.data.order);
 
-  const zeilen: string[] = [];
-  zeilen.push('# Leitfaden: eigene kleine Web-Werkzeuge bauen');
-  zeilen.push('');
-  zeilen.push(
-    '> Vorgaben und Rezepte für kleine Werkzeuge, die vollständig im Browser laufen — ' +
-      'ohne Server, ohne Konto, ohne Build-Schritt, wo es ohne geht. Zielgruppe sind ' +
-      'Gemeinderätinnen, Gemeinderäte und lokale Gruppen, die mit einer KI-Assistenz ' +
-      'etwas Eigenes bauen. Herausgeber: Die Grünen Österreich.',
+  const z: string[] = [];
+  z.push('# Build guide: small local tools for people without a development setup');
+  z.push('');
+  z.push(
+    '> How to build a small tool for someone who has a browser and nothing else — no terminal, ' +
+      'no editor, no package manager, no admin rights. Maintained by the Austrian Greens for local ' +
+      'councillors and volunteers, but nothing in it is specific to them.',
   );
-  zeilen.push('');
-  zeilen.push('## So benutzt du diese Datei');
-  zeilen.push('');
-  zeilen.push(
-    '- Wähle anhand der Aufgabe den passenden Projekttyp und lies die dort genannten Kapitel.',
-  );
-  zeilen.push(
-    '- Jedes Kapitel gibt es als reinen Markdown-Text unter der angegebenen `.md`-Adresse.',
-  );
-  zeilen.push(
-    '- Lies nicht alles. Zwei bis drei Kapitel genügen für nahezu jede Aufgabe.',
-  );
-  zeilen.push('');
-  zeilen.push('## Grundsätze, die für alle Projekte gelten');
-  zeilen.push('');
-  zeilen.push('- Alles läuft im Browser auf dem Gerät. Kein Server, keine Übertragung von Nutzerdaten.');
-  zeilen.push('- Einfachste tragfähige Technik: eine HTML-Datei oder Vanilla-JS-Module, Framework nur mit Begründung.');
-  zeilen.push('- Fremdbibliotheken per CDN mit fest angegebener Version, niemals ins Projekt kopieren.');
-  zeilen.push('- Design-System einbinden: https://design-system.gruene.at/design-system.css');
-  zeilen.push('- Oberflächentexte auf Deutsch. Keine Werkzeug-Attribution in Code oder Commits.');
-  zeilen.push('- Jede Rechnung braucht eine Kontrollsumme, jede Textauswertung eine Fundstelle.');
-  zeilen.push('');
-  const grundlagen = kapitel.filter((k) => k.data.grundlage);
-  zeilen.push('## Projekttypen');
-  zeilen.push('');
-  zeilen.push(
-    `Für jeden Typ zuerst lesen: ${grundlagen.map((k) => k.data.title).join(', ')}. ` +
-      'Danach nur die unten genannten Kapitel — mehr braucht keine Aufgabe.',
-  );
-  zeilen.push('');
-  for (const typ of PROJEKTTYPEN) {
-    const passend = kapitel.filter((k) => !k.data.grundlage && k.data.fuer.includes(typ.id));
-    zeilen.push(`### ${typ.name}`);
-    zeilen.push(`${typ.einzeiler} Wann: ${typ.wann} Aufwand: ${typ.aufwand}`);
-    if (passend.length) {
-      zeilen.push(
-        `Relevante Kapitel: ${passend.map((k) => k.data.title).join(', ')}`,
-      );
-    }
-    zeilen.push('');
+  z.push('');
+  z.push('## Read this first');
+  z.push('');
+  z.push('Unless the user explicitly asks for something else:');
+  z.push('');
+  z.push('- Deliver ONE self-contained `.html` file: HTML, CSS and JavaScript in one document.');
+  z.push('- It must run from a double-click (`file://`). No build step, no bundler, no npm, no local server.');
+  z.push('- NO `<script type="module">` and NO `import`. ES modules are blocked on `file://` and the tool arrives dead.');
+  z.push('  Use classic `<script>` tags and CDN libraries that expose a global (UMD).');
+  z.push('- Pin every CDN version. `@latest` breaks the tool on a random day.');
+  z.push('- Link the design system: https://design-system.gruene.at/design-system.css');
+  z.push('  It styles no HTML tags — you must set `body` margin/background/color/font-family from the `--gat-*` tokens.');
+  z.push('- Write the interface in the user’s language (usually German for this audience). This guide stays English.');
+  z.push('- Process everything locally. No analytics, no tracking, no remote call carrying user data.');
+  z.push('- Build a visible check into the tool: control total, row count in vs. shown, source for every derived claim.');
+  z.push('- Never encourage pasting personal data, donor lists or non-public papers into the chat. Offer sample data instead.');
+  z.push('');
+  z.push('These work from a double-clicked file (verified in Chromium, `isSecureContext` is true):');
+  z.push('localStorage, IndexedDB, File System Access API, canvas `toBlob()`, clipboard, CDN resources.');
+  z.push('These do NOT: ES modules, `fetch()` of a neighbouring local file, service workers.');
+  z.push('');
+  z.push('## How to use this file');
+  z.push('');
+  z.push('- Read the rules above. They apply to every task.');
+  z.push('- Fetch one or two sections that match the task. Do not fetch all of them.');
+  z.push(`- Need everything in one request? [llms-full.txt](${BASIS}/llms-full.txt) contains every section.`);
+  z.push('');
+  z.push('## Sections');
+  z.push('');
+  for (const a of abschnitte) {
+    z.push(`- [${a.data.title}](${BASIS}/guide/${a.id}.md) — read when: ${a.data.read_when}`);
+    z.push(`  ${a.data.summary}`);
   }
-  zeilen.push('## Kapitel');
-  zeilen.push('');
-  for (const k of kapitel) {
-    zeilen.push(
-      `- [${k.data.reihenfolge}. ${k.data.title}](${BASIS}/kapitel/${k.id}.md): ${k.data.fuer_ki}`,
-    );
-  }
-  zeilen.push('');
-  zeilen.push('## Weiterführend');
-  zeilen.push('');
-  zeilen.push(`- [Seite für KI-Assistenzen](${BASIS}/fuer-ki/): fertige Prompt-Bausteine und Projektregeln`);
-  zeilen.push('- [Design-System](https://design-system.gruene.at/): Tokens, Komponenten, Style Guide');
-  zeilen.push('- [Werkzeug-Verzeichnis](https://werkzeuge.gruene.at/): bestehende Werkzeuge, bevor du neu baust');
-  zeilen.push('');
+  z.push('');
+  z.push('## Related');
+  z.push('');
+  z.push('- [Design system](https://design-system.gruene.at/): tokens, components, live style guide');
+  z.push('- [Tool directory](https://werkzeuge.gruene.at/): check whether it already exists before building');
+  z.push(`- [Human-readable start page](${BASIS}/en/)`);
+  z.push('');
 
-  return new Response(zeilen.join('\n'), {
+  return new Response(z.join('\n'), {
     headers: { 'Content-Type': 'text/plain; charset=utf-8' },
   });
 };

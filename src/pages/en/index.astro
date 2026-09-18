@@ -1,0 +1,103 @@
+---
+import Base from '../../layouts/Base.astro';
+import Kopierbox from '../../components/Kopierbox.astro';
+import { pfad } from '../../lib/pfad';
+
+const prompt = `Follow the build guide at
+https://grueneat.github.io/leitfaden/llms.txt
+before you write any code.
+
+Give me one self-contained HTML file that I
+can save and open by double-clicking — no
+installation, no server, no terminal.
+
+What I need:`;
+---
+<Base title="Build your own tools" lang="en" schmal={true}>
+  <section class="lf-hero">
+    <h1>Build your own tools</h1>
+    <p class="lf-hero__lead">
+      You can have an AI build you a small tool — a calculator, an analysis, a
+      checklist. What you get back is <strong>one single file</strong>. Save
+      it, double-click it, done. No installation, no account, no server. Your
+      data stays on your device.
+    </p>
+  </section>
+
+  <section class="lf-section">
+    <h2>How it works</h2>
+    <ol class="lf-schritte">
+      <li>Open an AI chat that can read web pages.</li>
+      <li>Paste the paragraph below.</li>
+      <li>Write what you need after it, in plain words.</li>
+      <li>Save the file and double-click it.</li>
+    </ol>
+
+    <Kopierbox text={prompt} titel="Paste this:" knopf="Copy" erfolg="Copied">
+      <p class="lf-kopierbox__fuss">
+        It points the AI at the <a href={pfad('guide')}>build guide</a>, which
+        sets out how such a tool has to be built. Add "write the interface in
+        &lt;your language&gt;" if that is not English.
+      </p>
+    </Kopierbox>
+  </section>
+
+  <section class="lf-section">
+    <h2>Examples</h2>
+    <ul class="lf-beispiele">
+      <li>"Work out four options for compensation payments to neighbouring municipalities, with a control total."</li>
+      <li>"Read this attendee list as CSV and show me the breakdown by district."</li>
+      <li>"A meeting-preparation checklist that remembers what I ticked off."</li>
+      <li>"A form that produces a finished motion text I can copy out."</li>
+      <li>"An image in our layout with title, date and location, ready to download."</li>
+    </ul>
+    <p class="lf-hinweis">
+      If a task happens only once, you do not need a tool — the chat answer is
+      faster. Tools pay off when something recurs, or when the result has to be
+      defensible.
+    </p>
+  </section>
+
+  <section class="lf-section">
+    <h2>What else is here</h2>
+    <div class="lf-grid">
+      <a class="lf-karte" href={pfad('guide')}>
+        <span class="lf-karte__titel">The build guide</span>
+        <p class="lf-karte__kurz">
+          The actual rules the AI follows: what to build, how to read and write
+          files, charts, images, layout, and how to make the result checkable.
+          You do not have to read it — the AI fetches it.
+        </p>
+      </a>
+      <a class="lf-karte" href={pfad('guide', 'going-further')}>
+        <span class="lf-karte__titel">When one file is not enough</span>
+        <p class="lf-karte__kurz">
+          For later: several pages, a public address via GitHub Pages, and
+          example repositories of tools built exactly this way.
+        </p>
+      </a>
+    </div>
+  </section>
+
+  <section class="lf-section">
+    <h2>Two things up front</h2>
+    <div class="gat-callout gat-callout--warn">
+      <p class="gat-callout__lead">What does not go into the chat</p>
+      <p>
+        Names with addresses, dates of birth, bank details, donor and member
+        lists, confidential papers. Describe the structure instead ("a table
+        with the columns Name, District, Amount"), have the tool built against
+        that, and open the real file only in the finished tool — it never
+        leaves your device.
+      </p>
+    </div>
+    <div class="gat-callout gat-callout--info">
+      <p class="gat-callout__lead">Checking the numbers stays with you</p>
+      <p>
+        The AI computes, you know the subject. Check a total you already know,
+        and whether something you expect is missing. Ask explicitly for a
+        control total and for the number of rows it actually read.
+      </p>
+    </div>
+  </section>
+</Base>
