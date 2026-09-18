@@ -7,7 +7,7 @@ import { pfad, datei } from '../../lib/pfad';
 const abschnitte = (await getCollection('guide')).sort((a, b) => a.data.order - b.data.order);
 ---
 <Base title="Build guide" lang="en"
-      description="The rules an AI should follow when building a small local tool: one self-contained HTML file, no build step, no server."
+      description="The rules an AI should follow when building a small local tool: a folder that runs from a double-click, no build step, no server."
       schmal={true}>
   <header class="lf-kapitel-kopf">
     <h1>Build guide</h1>
@@ -38,11 +38,14 @@ const abschnitte = (await getCollection('guide')).sort((a, b) => a.data.order - 
       </tbody>
     </table>
 
-    <h2>The one rule that matters most</h2>
+    <h2>The rule that matters most</h2>
     <p>
-      Deliver <strong>one self-contained <code>.html</code> file</strong> that
-      runs from a double-click. No build step, no server, no install, no ES
-      modules. Everything else follows from that.
+      Deliver a folder the user saves, where
+      <strong><code>index.html</code> runs from a double-click</strong>. No
+      build step, no server, nothing to install. One file for a small tool,
+      several when it earns it — classic <code>&lt;script src&gt;</code> and
+      <code>&lt;link&gt;</code> work fine across files. What does not work on
+      <code>file://</code>: ES modules and <code>fetch()</code> of local data.
     </p>
 
     <h2>Sections</h2>

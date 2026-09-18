@@ -1,7 +1,7 @@
 ---
-title: The default deliverable
+title: What to deliver
 order: 1
-summary: "Ship ONE self-contained .html file that runs from a double-click. No build step, no server, no install, no ES modules. Classic <script> tags only, libraries from CDN as globals with a pinned version."
+summary: "Deliver a folder the user saves; index.html opens by double-click. One file for a small tool, several when the tool earns it — classic <script src> and <link> across files work fine from file://. What does NOT work: ES modules and fetch() of local files. Libraries from CDN as globals with a pinned version."
 read_when: "Always. Read this before writing any code — it constrains every other section."
 ---
 
@@ -16,25 +16,87 @@ Anything that requires them to install software, run a command, or start a
 local server has failed before it starts. This is not a preference — it is the
 constraint that decides whether the tool gets used.
 
-## The contract
+## The deliverable
 
-Unless the user explicitly asks for something else, deliver **one single
-`.html` file**. They save it, double-click it, and it works.
+**A folder the user saves. `index.html` is what they double-click.**
+
+How many files that folder holds is your choice. What matters is that it runs
+from `file://` without anything being installed or started.
 
 | Rule | Why |
 |---|---|
-| One file: HTML + CSS + JS together | Nothing to wire up, easy to email, impossible to lose half of it |
-| Runs from `file://` (double-click) | No server, no `npx`, no terminal |
+| `index.html` runs by double-click | No server, no `npx`, no terminal |
 | No build step, no bundler, no npm | They cannot run any of it |
-| No `<script type="module">`, no `import` | ES modules are blocked on `file://` — the tool silently does nothing |
-| Classic `<script>` tags only | Works everywhere, including `file://` |
-| Libraries from CDN, UMD/global build, pinned version | No install; a floating version breaks the tool on a random Tuesday |
+| **No `<script type="module">`, no `import`** | Blocked on `file://` — the tool silently does nothing |
+| **No `fetch()` of a local file** | Blocked on `file://` — put data in a `.js` file instead |
+| Classic `<script src>` and `<link rel=stylesheet>` | These *do* work across files, including subfolders |
+| Libraries from CDN, global (UMD) build, pinned version | No install; a floating version breaks the tool later |
 | UI text in the user's language | Almost always German for this audience |
 
-### What DOES work from a double-clicked file
+## One file or several?
 
-Verified in Chromium loading a local file: `window.isSecureContext` is `true`,
-so the following are all available without a server.
+Both are fine. Choose by handover cost, not by tidiness.
+
+**Start with one file** when the tool is small. It is the easiest thing to
+save out of a chat, to email, and to keep track of. For a calculator, a form,
+a checklist, a single analysis — one file is right, and splitting it is
+busywork.
+
+**Split into several files** when the tool genuinely earns it: a few hundred
+lines of logic, a sizeable data table, a stylesheet worth reading on its own.
+A flat folder is the usual shape:
+
+```text
+mein-werkzeug/
+├── index.html
+├── app.js
+├── daten.js
+└── stil.css
+```
+
+```html
+<link rel="stylesheet" href="stil.css">
+...
+<script src="daten.js"></script>
+<script src="app.js"></script>
+```
+
+Scripts run in document order, so a global defined in `daten.js` is available
+in `app.js`. Verified working from a double-clicked file, subfolders included.
+
+**Keep the folder flat when you split.** Nested directories work technically,
+but every extra path is another chance for the user to save a file in the
+wrong place. `index.html` + two or three siblings is the sweet spot.
+
+**Say how to save it.** When you hand over more than one file, name each file
+explicitly and say they all go in the same folder. That is the only part of
+multi-file delivery that is genuinely harder for the user.
+
+## Data belongs in a .js file, not a .json file
+
+`fetch('daten.json')` fails from `file://` — Chrome reports *URL scheme "file"
+is not supported*. Do not use it, and do not work around it with a local
+server.
+
+Instead, write the data as JavaScript that assigns a global:
+
+```js
+// daten.js
+window.DATEN = {
+  gemeinden: [
+    { name: 'Oberndorf', einwohner: 5700 },
+    { name: 'Herzogenburg', einwohner: 8300 }
+  ]
+};
+```
+
+Same content, loads with a plain `<script src="daten.js">`, and the user can
+still open and edit it in any text editor.
+
+## What DOES work from a double-clicked file
+
+Verified in Chromium: `window.isSecureContext` is `true` for a local file, so
+the following are all available without a server.
 
 - `localStorage`, `sessionStorage`, `IndexedDB`
 - File System Access API: `showOpenFilePicker`, `showSaveFilePicker`,
@@ -42,17 +104,16 @@ so the following are all available without a server.
   *Saving results*)
 - `<canvas>` including `toBlob()` and `toDataURL()`
 - Clipboard API
-- Loading CSS, fonts, images and scripts from a CDN
+- CSS, fonts, images and scripts from a CDN
+- Your own CSS, JS and images by relative path
 
-So "no server" costs you almost nothing. Build for `file://` by default.
+## What does NOT work
 
-### What does NOT work from a double-clicked file
-
-- **ES modules.** `<script type="module">` and any `import` statement fail.
-  This is the single most common way a delivered tool arrives dead.
-- **`fetch()` of a neighbouring local file.** Embed the data in the HTML
-  instead, or have the user pick the file (see *Reading files*).
-- Anything that needs a real origin: service workers, some cookie behaviour.
+- **ES modules.** `<script type="module">` and `import` fail with a CORS error
+  against origin `null`. This is the single most common way a delivered tool
+  arrives dead.
+- **`fetch()` / `XMLHttpRequest` on a local file.** See above.
+- Service workers, and anything else needing a real origin.
 
 ## The skeleton to start from
 
@@ -81,7 +142,7 @@ So "no server" costs you almost nothing. Build for `file://` by default.
   <!-- UI here -->
 </main>
 <script>
-  // All logic here. No imports. No modules.
+  // Logic here, or in a sibling file via <script src>. No imports.
 </script>
 </body>
 </html>
@@ -101,8 +162,8 @@ use it.
 - If the task happens only once, say so: a chat answer is the better tool, and
   building anything is waste.
 
-## When to break the one-file rule
+## When this stops being enough
 
-Only when the user asks for something the rule cannot carry: a public website
-with several pages and its own address, or a tool that others will contribute
-to. Say what you are changing and why before you do it. See *Going further*.
+Only when the user needs a public address, several linked pages, or other
+people contributing. That is a different shape of project — see *Going
+further*.

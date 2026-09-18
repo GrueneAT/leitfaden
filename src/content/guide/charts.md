@@ -32,7 +32,8 @@ from a double-clicked file. **Pin the version.** Verified working from
 `file://`.
 
 The design system also publishes `gat-charts.js` with the palette and axis
-helpers, but it is an **ES module**: `import` fails in a single-file tool. Read
+helpers, but it is an **ES module**: `import` fails on `file://` however many
+files the tool has. Read
 the tokens from CSS instead — same colours, no module:
 
 ```js

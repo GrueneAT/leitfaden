@@ -33,14 +33,18 @@ Beispiel-Repositories ganz am Schluss.
 
 ## Die zentrale Vorgabe
 
-Eine einzige `.html`-Datei, die per Doppelklick läuft. Kein Build, kein Server,
-keine Installation, **keine ES-Module** (`import` scheitert auf `file://` und
-das Werkzeug kommt tot an). Klassische `<script>`-Tags, Bibliotheken per CDN
-als Global mit fester Version.
+Ein Ordner, den die Nutzerin speichert; `index.html` läuft per Doppelklick.
+Kein Build, kein Server, keine Installation. Eine Datei bei kleinen
+Werkzeugen, mehrere wenn es sich lohnt — das ist eine Abwägung, keine Regel.
 
-Auf `file://` geprüft und funktionsfähig: `isSecureContext` ist `true`,
-localStorage, IndexedDB, File System Access API, Canvas-Export, Zwischenablage
-und CDN-Ressourcen inklusive Design-System-CSS.
+**Nicht** verwendbar sind ES-Module (`import` scheitert auf `file://` mit
+CORS gegen Origin `null`) und `fetch()` auf lokale Dateien. Daten kommen
+deshalb als `.js`-Datei, die ein Global setzt.
+
+Auf `file://` in Chromium nachgemessen: `isSecureContext` ist `true`;
+localStorage, IndexedDB, File System Access API, Canvas-Export, Zwischenablage,
+CDN-Ressourcen und eigene CSS-/JS-/Bilddateien per relativem Pfad über
+klassische Tags funktionieren — auch über Unterordner.
 
 ## Stack
 

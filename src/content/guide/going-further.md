@@ -1,40 +1,46 @@
 ---
 title: Going further
 order: 11
-summary: "Only when one file is genuinely not enough. Several files need a local server (ES modules and fetch fail on file://) — that is the real cost. GitHub Pages publishes a static folder for free; watch the base path and remember everything in a public repo is public."
+summary: "For a public address, several linked pages, or other contributors. Splitting into files does NOT require this — that works by double-click. GitHub Pages publishes a static folder for free; watch the base path and remember everything in a public repo is public."
 read_when: "The user asks for a public address, several pages, or wants others to contribute. Not before."
 ---
 
-Everything so far assumed one file on one laptop. That covers most tools and
-should stay the default. This section is the exception — do not reach for it
-early, and say out loud what it costs.
+Everything so far assumed a folder on one laptop, opened by double-click. That
+covers most tools and stays the default. This section is about the step
+beyond it.
 
-## The threshold
+## This is NOT about splitting into files
 
-Split into several files only when one of these is true:
+Splitting a tool across `index.html`, `app.js` and `stil.css` needs nothing
+from this section. Classic `<script src>` and `<link>` work from a
+double-clicked file, subfolders included — see *What to deliver*. Do not send
+a user to a local server because their tool grew to four files.
 
-- Other people must reach it at an address, not receive it as an attachment.
-- It genuinely needs several pages with their own links.
-- More than one person will change it.
+## The actual threshold
 
-"It is getting long" is not sufficient. A 1,500-line single file that works by
-double-click is better than a four-file project the user cannot open.
+You are past the double-click folder only when one of these is true:
 
-## What splitting actually costs
+- Other people must reach it at an **address**, not receive it as an attachment.
+- It needs **several pages with their own links** that people can bookmark.
+- **More than one person** will change it over time.
+- It needs **ES modules, a bundler or a framework** — which in practice means
+  it has become a web application, not a tool.
 
-This is the honest part: **as soon as there is more than one file, the
-double-click stops working.** ES modules and `fetch()` of a neighbouring file
-are blocked on `file://`. From then on a local server is required to try it
-out:
+"It is getting long" is not one of them.
+
+## When a local server does become necessary
+
+Only if you deliberately move to ES modules or `fetch()` of local data — both
+blocked on `file://`. Then trying it out locally requires:
 
 ```bash
 npx serve .                 # needs Node.js
 python3 -m http.server      # needs Python
 ```
 
-For a user without a terminal that is a wall. So either keep it in one file,
-or move straight to publishing — where the address itself serves the page and
-no local server is needed.
+For a user without a terminal that is a wall. Two ways around it: stay with
+classic scripts and a `.js` data file, or publish, where the address itself
+serves the page and no local server is involved.
 
 ## Publishing on GitHub Pages
 
