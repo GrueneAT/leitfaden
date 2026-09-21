@@ -86,8 +86,12 @@ being listed.
   The moment you restyle components instead of tokens, the next design-system
   update breaks your tool silently.
 
-One token that looks useful and is not: `--gat-color-dunkelgruen-strong` is
-unused by any component. Overriding it changes nothing.
+One token that behaves differently from the rest:
+`--gat-color-dunkelgruen-strong` is used by no component in the design
+system. It exists for pages that apply `opacity` to brand-coloured text,
+where the normal green would drop below the readable threshold. Overriding it
+changes nothing you can see unless your own CSS references it — so set it if
+you use it, and leave it out otherwise.
 
 ## The logo
 
