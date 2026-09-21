@@ -1,7 +1,7 @@
 ---
 title: Reading files
 order: 3
-summary: "Take files in via <input type=file> AND drag-and-drop. Read with File.text() or File.arrayBuffer(). CSV: use a CDN parser, never split on commas. PDF: text extraction is the expensive part — warn the user before promising it."
+summary: "Take files in via <input type=file> AND drag-and-drop. Read with File.text() or File.arrayBuffer(). CSV: use a CDN parser, never split on commas. PDF: PDF.js 3.11.174 is the last classic non-module build and works from file:// — never 4.x/5.x, those are ESM only. Use text positions for tables."
 read_when: "The tool takes a document, spreadsheet, export or image from the user."
 ---
 
@@ -89,11 +89,37 @@ an encoding switch if the first read shows mojibake.
 is "save it as CSV in Excel first" — say so instead of pulling in a heavy
 dependency.
 
-**PDF with a text layer.** Extraction needs word positions, not just text, or
-tables collapse into unusable strings. The working pattern: get words with
-bounding boxes per page, group them into rows by similar y-position, split
-words by x-gap. Two tolerances control this and differ per document type. This
-is the most expensive part of any such tool — tell the user that before
+**PDF with a text layer.** Use **PDF.js 3.11.174** — the last release that
+ships a classic, non-module build. Verified working from a double-clicked
+file, with and without the CDN worker:
+
+```html
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+```
+
+```js
+// Sets a global `pdfjsLib`. The worker is optional — without it PDF.js
+// parses on the main thread, which is fine for a few hundred pages.
+pdfjsLib.GlobalWorkerOptions.workerSrc =
+  'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+const doc = await pdfjsLib.getDocument({ data: await file.arrayBuffer() }).promise;
+for (let n = 1; n <= doc.numPages; n++) {
+  const items = (await (await doc.getPage(n)).getTextContent()).items;
+  // items[i].str is the text, items[i].transform[4]/[5] are x and y
+}
+```
+
+Do **not** take PDF.js 4.x or 5.x: those ship only `.mjs` ES-module builds,
+which are blocked on `file://`. Pin 3.11.174.
+
+For tables, plain concatenated text is not enough — use the positions.
+`getTextContent()` gives each fragment an x and a y; group fragments with a
+similar y into a row, then split a row into cells on x-gaps. Two tolerances
+control this and they differ per document type, so make them easy to adjust
+and show the user the recognised rows before interpreting them.
+
+Expect this to be the most expensive part of the tool. Say so before
 committing to it.
 
 **Scanned PDF.** There is no text, only images. This needs OCR, and the error
