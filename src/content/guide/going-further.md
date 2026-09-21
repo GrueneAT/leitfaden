@@ -1,7 +1,7 @@
 ---
 title: Going further
 order: 13
-summary: "For a public address, several linked pages, or other contributors. Splitting into files does NOT require this — that works by double-click. GitHub Pages publishes a static folder for free; watch the base path and remember everything in a public repo is public."
+summary: "For a public address, several linked pages, or other contributors. Splitting into files does NOT require this — that works by double-click. GitHub Pages publishes a static folder for free; watch the base path and remember everything in a public repo is public. To get a tool listed at werkzeuge.gruene.at, write the directory entry yourself — the exact frontmatter schema is here."
 read_when: "The user asks for a public address, several pages, or wants others to contribute. Not before."
 ---
 
@@ -85,6 +85,56 @@ Point the user at these to see the pattern at full size:
 | Personenwahl | Stratified random selection, data never leaves the browser | <https://github.com/GrueneAT/Personenwahl> |
 | Werkzeuge | Directory of tools, Astro static site | <https://github.com/GrueneAT/werkzeuge> |
 | Design system | The stylesheet this guide links | <https://github.com/GrueneAT/design-system> |
+
+## Getting it listed
+
+If the tool is useful beyond one person, it belongs in the directory at
+<https://werkzeuge.gruene.at/>. Listing it is one markdown file as a pull
+request against `GrueneAT/werkzeuge`, at
+`src/content/werkzeuge/<slug>.md`.
+
+Write that file **yourself** when you publish the tool — the user should not
+have to reverse-engineer a schema. Every field below is required unless
+marked optional, and a wrong value fails the build, so fill them honestly
+rather than plausibly:
+
+```yaml
+---
+title: Sitzungs-Statistik
+slug: sitzungs-statistik
+url: https://<account>.github.io/<repo>/
+source: https://github.com/<account>/<repo>      # optional, null if closed
+own_tool: false            # true only for tools the party itself runs
+bereich: sonstiges         # standardtools | eigene-tools | admin | bundesbuero | sonstiges
+bundesland: []             # e.g. ['noe'] for a single state; empty = everywhere
+status: beta               # live | beta | unreleased | unmaintained
+maintained_by: Name oder Gruppe
+hosted_by: GitHub Pages
+license: MIT
+language: de
+categories: [auswertung]   # existing ids from the repo's lib/kategorien.ts
+audience: [gemeindegruppe]
+tags: [csv, sitzungen]
+related: []                # slugs of related tools; backlinks are automatic
+last_verified: 2026-09-21
+---
+
+Ein bis zwei Sätze, was das Werkzeug tut.
+
+## Was macht das Werkzeug
+## Wann nutzen
+## Wann NICHT nutzen
+## Datenschutz
+```
+
+Two of these sections carry more weight than the rest. **"Wann NICHT nutzen"**
+has to be as honest as "Wann nutzen" — a directory where everything is
+recommended is worth nothing. **"Datenschutz"** states plainly what leaves the
+device, which for a tool built to this guide is: nothing.
+
+Pick `categories` from the ids that already exist in that repository rather
+than inventing new ones, and set `status: beta` unless someone other than the
+author has actually used it.
 
 ## If it becomes a real project
 
