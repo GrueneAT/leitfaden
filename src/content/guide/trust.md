@@ -1,6 +1,6 @@
 ---
 title: Making the result checkable
-order: 11
+order: 12
 summary: "Build a visible check into the tool: a control total that must reconcile, the input row count, and a stated source for every derived claim. Show what was skipped. State limits instead of hiding them."
 read_when: "The tool computes or summarises anything the user will repeat in public."
 ---

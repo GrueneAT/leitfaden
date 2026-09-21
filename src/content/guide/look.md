@@ -17,6 +17,10 @@ Verified working from a double-clicked local file.
 Never copy the file into the project. The same goes for logos, fonts and
 libraries: link them, do not vendor them.
 
+This is the **Austrian Greens'** design system. If the tool is for another
+party, another country or an association, do not fork it — override a short
+list of tokens in a separate stylesheet, as described in *Adapting the look*.
+
 ## The four lines everybody forgets
 
 The design system deliberately styles **no HTML tags** — no `body`, no `h1`.

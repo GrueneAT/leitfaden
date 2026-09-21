@@ -1,6 +1,6 @@
 ---
 title: Documenting the tool
-order: 10
+order: 11
 summary: "Document inside the tool first — a one-line purpose under the title, inline help at the field that needs it, a data-handling sentence, and a date. Then one short plain-text readme in the folder. Comment the domain decisions in the code, not the JavaScript. No docs folder, no changelog ceremony."
 read_when: "Before you hand anything over. Applies to every tool, however small."
 ---

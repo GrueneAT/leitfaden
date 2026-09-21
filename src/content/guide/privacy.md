@@ -1,6 +1,6 @@
 ---
 title: Data protection
-order: 12
+order: 13
 summary: "The tool must not transmit user data — no analytics, no tracking, no remote calls carrying file contents. But the page still makes network requests (CDN, design system, fonts pulled in by an @import you never wrote): check them before promising anything, and claim only that the FILES stay local. Separately: warn the user not to paste personal data, donor lists or non-public drafts into the chat."
 read_when: "Always. Especially when the tool touches names, addresses, finances or anything non-public."
 ---

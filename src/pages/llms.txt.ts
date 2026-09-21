@@ -38,6 +38,9 @@ export const GET: APIRoute = async () => {
   z.push('- Pin every CDN version. `@latest` breaks the tool on a random day.');
   z.push('- Link the design system: https://design-system.gruene.at/design-system.css');
   z.push('  It styles no HTML tags — you must set `body` margin/background/color/font-family from the `--gat-*` tokens.');
+  z.push('  It is the AUSTRIAN Greens\' system. For another organisation do not fork or copy it: add a');
+  z.push('  `lokal.css` AFTER it that overrides ~15 brand tokens in a plain `:root` block (see "Adapting');
+  z.push('  the look"). Ask before rebranding — never apply another party\'s colours unprompted.');
   z.push('- Write the interface in the language the tool will be USED in — derived from the municipality,');
   z.push('  institution or audience, NOT from the language the request was written in. A request in English');
   z.push('  about a Flemish town council means a Dutch interface. Ask once if the two genuinely conflict.');
