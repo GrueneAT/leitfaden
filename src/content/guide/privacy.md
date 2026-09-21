@@ -1,7 +1,7 @@
 ---
 title: Data protection
 order: 12
-summary: "The tool must not transmit user data — no analytics, no tracking pixels, no remote calls carrying file contents. Say so visibly in the UI. Separately: warn the user not to paste personal data, donor lists or non-public drafts into the chat."
+summary: "The tool must not transmit user data — no analytics, no tracking, no remote calls carrying file contents. But the page still makes network requests (CDN, design system, fonts pulled in by an @import you never wrote): check them before promising anything, and claim only that the FILES stay local. Separately: warn the user not to paste personal data, donor lists or non-public drafts into the chat."
 read_when: "Always. Especially when the tool touches names, addresses, finances or anything non-public."
 ---
 
@@ -10,29 +10,59 @@ which one you are answering.
 
 ## 1. What the finished tool does
 
-A tool built to this guide runs entirely in the browser. Nothing is uploaded,
-because there is no server. This is the reason it may be used with real
-municipal documents at all.
+A tool built to this guide processes the user's files entirely in the browser.
+Their content never leaves the device, because there is no server to receive
+it. That is what makes the tool usable with real municipal documents.
 
-Keep it true:
+**But "the data stays here" and "nothing leaves this page" are not the same
+claim, and only the first one is true.** The page still makes network
+requests: the design system, a library from a CDN, and whatever those pull in
+turn. Every one of them reveals the visitor's IP address and the time of the
+visit to whoever serves it.
+
+Keep the first claim true:
 
 - **No analytics, no tracking pixels, no counters.**
 - **No remote calls carrying content** from the loaded files — not to an API,
   not to a "helpful" lookup service.
-- **No fonts or assets that leak the IP address** beyond the CDN resources the
-  page already needs.
 - If something does go outward — a deep link to an open data portal, say — it
   must be a deliberate click, never a side effect.
 
-Loading the design system and a library from a CDN transmits no user content
-and is fine.
+### Check what actually goes out before you promise anything
 
-State it in the UI, in one visible sentence:
+Do not reason about this from the source. Load the finished page and look at
+the network requests. When you have file access you can open it and read them
+off directly; otherwise tell the user how to check (open the developer tools,
+Network tab, reload).
 
-> Alle Daten werden ausschließlich in deinem Browser verarbeitet. Es findet
-> keine Übertragung an einen Server statt.
+You are looking for hosts nobody chose: font services, icon CDNs, analytics
+that came in with a snippet. **A stylesheet can pull in further requests you
+never wrote** — an `@import` at the top of a CSS file is enough, and it will
+not appear anywhere in your own code.
 
-Do not write that sentence unless the code makes it true.
+Known case: `design-system.gruene.at/design-system.css` currently starts with
+an `@import` from `fonts.googleapis.com`, so every page using it also contacts
+Google for fonts. Nothing of the user's data goes with it, but the IP address
+does. If the user cares about that — municipalities and parties often have to
+— say so plainly rather than letting the interface imply otherwise.
+
+### The sentence to put in the interface
+
+Say what is actually true: the **files** stay on the device.
+
+> Deine Dateien werden nur in diesem Browser gelesen und nirgendwohin
+> übertragen.
+
+That claim survives scrutiny. The absolute version — *"es findet keine
+Übertragung statt"* — does not, as soon as somebody opens the network tab, and
+being caught overstating this costs more trust than the fonts ever cost.
+
+If the tool genuinely makes no third-party request at all, then say so, and
+say it precisely:
+
+> Diese Seite lädt nichts von Dritten nach. Alles läuft lokal.
+
+Never write either sentence before you have checked.
 
 ## 2. What goes into the chat
 

@@ -39,11 +39,14 @@ which format is expected; at an unusual field, say what it means. Use
 </p>
 ```
 
-**The data-handling sentence**, visibly, once:
+**The data-handling sentence**, visibly, once. Word it as a claim about the
+user's files, which is the part you can actually stand behind — see
+*Data protection* before you write it:
 
 ```html
 <p class="gat-callout gat-callout--info">
-  Alle Daten bleiben in deinem Browser. Es wird nichts hochgeladen.
+  Deine Dateien werden nur in diesem Browser gelesen und nirgendwohin
+  übertragen.
 </p>
 ```
 
@@ -91,7 +94,9 @@ Dateien
   stil.css     das Aussehen
 
 Daten
-  Alles bleibt im Browser. Es wird nichts hochgeladen.
+  Deine Dateien werden nur in diesem Browser gelesen und nirgendwohin
+  übertragen. Zum Laden von Design und Diagramm-Bibliothek braucht die
+  Seite eine Internetverbindung; deine Dateien gehen dabei nicht mit.
 
 Stand
   18.09.2026

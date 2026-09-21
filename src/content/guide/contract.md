@@ -1,7 +1,7 @@
 ---
 title: What to deliver
 order: 1
-summary: "Deliver a folder the user saves; index.html opens by double-click. One file for a small tool, several when the tool earns it — classic <script src> and <link> across files work fine from file://. What does NOT work: ES modules and fetch() of local files. Libraries from CDN as globals with a pinned version."
+summary: "Deliver a folder the user saves; index.html opens by double-click. One file for a small tool, several when the tool earns it — classic <script src> and <link> across files work fine from file://. What does NOT work: ES modules and fetch() of local files. Libraries from CDN as globals with a pinned version. Interface in the language the tool is USED in, not the language of the request. Scope by the question asked, not by screen count."
 read_when: "Always. Read this before writing any code — it constrains every other section."
 ---
 
@@ -31,7 +31,31 @@ from `file://` without anything being installed or started.
 | **No `fetch()` of a local file** | Blocked on `file://` — put data in a `.js` file instead |
 | Classic `<script src>` and `<link rel=stylesheet>` | These *do* work across files, including subfolders |
 | Libraries from CDN, global (UMD) build, pinned version | No install; a floating version breaks the tool later |
-| UI text in the user's language | Almost always German for this audience |
+| UI text in the language the tool will be *used* in | Not necessarily the language they wrote to you in — see below |
+
+## Which language the interface is in
+
+The language of the **use**, not the language of the request. Someone may
+write to you in English about a tool for a Flemish town council — that tool
+belongs in Dutch, because that is who will sit in front of it.
+
+Derive it from where the tool will be used: the municipality, the institution,
+the audience for its output. When the request itself and the place disagree,
+and you cannot tell which one governs, **ask once** instead of guessing.
+
+What follows the interface language, and is easy to forget:
+
+- **Number and date format** — `nl-BE`, `de-AT`, `fr-BE`. A Belgian tool
+  formatting amounts the German way looks broken to its user.
+- **The name of the short readme** — `LEESMIJ.txt`, `LIESMICH.txt`,
+  `README.txt`. See *Documenting the tool*.
+- **Labels on exports and charts**, including the ones baked into an exported
+  image.
+- **Error messages**, which are the texts people actually have to understand.
+
+Two things stay in English regardless, because they are not the interface:
+this guide, and the rules file you leave for the next assistant
+(`CLAUDE.md` / `AGENTS.md`). Those are read by machines and developers.
 
 ## One file or several?
 
@@ -161,13 +185,31 @@ broken. See *Making it look right*.
 
 ## How to scope the first version
 
-Build the smallest thing that produces a real answer, then stop and let them
-use it.
+Build the smallest thing that actually answers their question, then stop and
+let them use it.
 
-- One screen. No settings, no tabs, no login, no onboarding.
-- Real data from the start — ask for an actual file or three real rows.
-- If the task happens only once, say so: a chat answer is the better tool, and
-  building anything is waste.
+**Smallest is measured against the question, not against a screen count.**
+Test every control you are about to add:
+
+> Can they answer the question they asked me without this element?
+> If yes, leave it out. If no, it belongs in the first version.
+
+A year selector in a tool for comparing years is not feature creep — without
+it the tool does not answer the question. A settings panel nobody asked for
+is. The difference is whether the element follows from the request or from
+your own enthusiasm.
+
+- **No login, no onboarding, no accounts, no user management.** These never
+  follow from the question.
+- **No second job.** A tool that reads budgets does not also send newsletters.
+  One tool, one question.
+- **Real data from the start** — ask for an actual file or three real rows.
+- **If the task happens only once**, say so: a chat answer is the better tool
+  and building anything is waste.
+
+Then ship it before adding anything else. What they still miss after using it
+three times is a real feature; what occurred to you while building usually is
+not.
 
 ## When this stops being enough
 
