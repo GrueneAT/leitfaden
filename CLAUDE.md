@@ -7,8 +7,7 @@ Statische Astro-Site. Zwei Dinge in einem Repo:
 2. Ein **englischer Leitfaden für KI-Assistenzen**, der vorgibt, wie ein
    kleines Werkzeug gebaut sein muss.
 
-Live: https://grueneat.github.io/leitfaden/ — Organisationsadresse, **keine
-eigene gruene.at-Domain**.
+Live: https://flomotlik.github.io/ai-build-guide/ — persoenliche GitHub-Pages-Adresse.
 
 ## Die zwei Regeln, die alles andere bestimmen
 
@@ -62,7 +61,7 @@ Wer diese Aussagen ändert, misst nach.
 ## Stack
 
 - **Astro 5**, Content Collection `guide`, Schema in `src/content.config.ts`
-- **npm**, **Pagefind** als Postbuild, **GitHub Pages** mit `base: '/leitfaden'`
+- **npm**, **Pagefind** als Postbuild, **GitHub Pages** mit `base: '/ai-build-guide'`
 - Design-System extern: `https://design-system.gruene.at/design-system.css`
 
 ## Konventionen

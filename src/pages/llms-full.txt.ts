@@ -1,7 +1,7 @@
 import type { APIRoute } from 'astro';
 import { getCollection } from 'astro:content';
 
-const BASIS = 'https://grueneat.github.io/leitfaden';
+const BASIS = 'https://flomotlik.github.io/ai-build-guide';
 
 // The whole guide in one document, so an assistant can take it in a single
 // fetch instead of following links per section.

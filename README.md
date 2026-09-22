@@ -4,7 +4,7 @@ Kurze Erklärung auf **Deutsch und Englisch**, dazu ein **englischer Leitfaden
 für KI-Assistenzen**, der beschreibt, wie ein kleines Werkzeug für Leute ohne
 Entwicklungsumgebung gebaut sein muss.
 
-**Live:** https://grueneat.github.io/leitfaden/
+**Live:** https://flomotlik.github.io/ai-build-guide/
 
 ## Die Idee
 
@@ -21,12 +21,12 @@ Die erzeugten Werkzeuge sprechen die Sprache der Nutzerin, meist Deutsch.
 
 | Adresse | Sprache | Für wen |
 | --- | --- | --- |
-| `/leitfaden/` | Deutsch | Menschen — kurze Erklärung, Absatz zum Kopieren |
-| `/leitfaden/en/` | Englisch | Menschen — dasselbe |
-| `/leitfaden/guide/` | Englisch | Der Leitfaden, lesbar gerendert |
-| `/leitfaden/llms.txt` | Englisch | **Einstieg für KIs** — Kernregeln plus Abschnittsindex |
-| `/leitfaden/llms-full.txt` | Englisch | Alle Abschnitte in einer Datei, ein Abruf |
-| `/leitfaden/guide/<name>.md` | Englisch | Ein Abschnitt als reiner Text |
+| `/ai-build-guide/` | Deutsch | Menschen — kurze Erklärung, Absatz zum Kopieren |
+| `/ai-build-guide/en/` | Englisch | Menschen — dasselbe |
+| `/ai-build-guide/guide/` | Englisch | Der Leitfaden, lesbar gerendert |
+| `/ai-build-guide/llms.txt` | Englisch | **Einstieg für KIs** — Kernregeln plus Abschnittsindex |
+| `/ai-build-guide/llms-full.txt` | Englisch | Alle Abschnitte in einer Datei, ein Abruf |
+| `/ai-build-guide/guide/<name>.md` | Englisch | Ein Abschnitt als reiner Text |
 
 Dreizehn Abschnitte, von „was überhaupt abzuliefern ist" und „wie du
 lieferst" über Dokumentation bis GitHub Pages und Beispiel-Repositories ganz
@@ -52,7 +52,7 @@ klassische Tags funktionieren — auch über Unterordner.
 - **Astro 5** mit Content Collections (Schema in `src/content.config.ts`)
 - **Design-System** extern von `https://design-system.gruene.at/design-system.css`
 - **Pagefind** als Postbuild-Schritt
-- **GitHub Pages**, `base: '/leitfaden'`
+- **GitHub Pages**, `base: '/ai-build-guide'`
 
 ## Lokal bauen
 

@@ -1,5 +1,5 @@
 // Interne Links immer hierueber bauen. Die Site liegt unter einem base-Pfad
-// (/leitfaden), nackte Root-Pfade wuerden auf GitHub Pages ins Leere zeigen.
+// (/ai-build-guide), nackte Root-Pfade wuerden auf GitHub Pages ins Leere zeigen.
 const BASE = import.meta.env.BASE_URL.replace(/\/$/, '');
 
 export function pfad(...teile: string[]): string {

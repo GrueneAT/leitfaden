@@ -24,15 +24,15 @@ const abschnitte = (await getCollection('guide')).sort((a, b) => a.data.order - 
     <table>
       <tbody>
         <tr>
-          <td><a href={datei('llms.txt')}><code>/leitfaden/llms.txt</code></a></td>
+          <td><a href={datei('llms.txt')}><code>/ai-build-guide/llms.txt</code></a></td>
           <td>Index and core rules. The entry point — start here.</td>
         </tr>
         <tr>
-          <td><a href={datei('llms-full.txt')}><code>/leitfaden/llms-full.txt</code></a></td>
+          <td><a href={datei('llms-full.txt')}><code>/ai-build-guide/llms-full.txt</code></a></td>
           <td>Every section in one file. One fetch, no follow-ups.</td>
         </tr>
         <tr>
-          <td><code>/leitfaden/guide/&lt;name&gt;.md</code></td>
+          <td><code>/ai-build-guide/guide/&lt;name&gt;.md</code></td>
           <td>A single section as plain text.</td>
         </tr>
       </tbody>
