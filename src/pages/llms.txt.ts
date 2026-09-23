@@ -35,7 +35,7 @@ export const GET: APIRoute = async () => {
   z.push('- NO `fetch()` or XHR on a local file — also blocked. Ship data as a `.js` file that');
   z.push('  assigns a global (`window.DATEN = {...}`), loaded with a plain `<script src>`.');
   z.push('- Pin every CDN version. `@latest` breaks the tool on a random day.');
-  z.push('- Link the design system: https://flomotlik.github.io/design-system/design-system.css');
+  z.push('- Link the design system: https://design-system.flomotlik.me/design-system.css');
   z.push('  It styles no HTML tags — you must set `body` margin/background/color/font-family from the `--fm-*` tokens.');
   z.push('  Its colours are named by ROLE (--fm-color-primary, -secondary, -accent), never by hue.');
   z.push('  For an organisation with its own colours do not fork or copy it: add a `local.css` AFTER it');
@@ -82,7 +82,7 @@ export const GET: APIRoute = async () => {
   z.push('');
   z.push('## Related');
   z.push('');
-  z.push('- [Design system](https://flomotlik.github.io/design-system/): tokens, components, live style guide');
+  z.push('- [Design system](https://design-system.flomotlik.me/): tokens, components, live style guide');
   z.push(`- [Human-readable start page](${BASIS}/en/)`);
   z.push('');
 

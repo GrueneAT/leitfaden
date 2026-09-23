@@ -62,7 +62,7 @@ Wer diese Aussagen ändert, misst nach.
 
 - **Astro 5**, Content Collection `guide`, Schema in `src/content.config.ts`
 - **npm**, **Pagefind** als Postbuild, **GitHub Pages** mit `base: '/ai-build-guide'`
-- Design-System extern: `https://flomotlik.github.io/design-system/design-system.css`
+- Design-System extern: `https://design-system.flomotlik.me/design-system.css`
 
 ## Konventionen
 

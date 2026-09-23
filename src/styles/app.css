@@ -1,5 +1,5 @@
 /* Build guide — thin site-level CSS on top of the design system.
-   The bulk comes from flomotlik.github.io/design-system/design-system.css; this file
+   The bulk comes from design-system.flomotlik.me/design-system.css; this file
    holds only the layout wrappers and the few things the system does not cover. */
 
 * { box-sizing: border-box; }

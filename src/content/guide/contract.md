@@ -155,7 +155,7 @@ the following are all available without a server.
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Tool name</title>
-<link rel="stylesheet" href="https://flomotlik.github.io/design-system/design-system.css">
+<link rel="stylesheet" href="https://design-system.flomotlik.me/design-system.css">
 <style>
   body {
     margin: 0;

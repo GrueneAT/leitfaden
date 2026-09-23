@@ -50,7 +50,7 @@ klassische Tags funktionieren — auch über Unterordner.
 ## Stack
 
 - **Astro 5** mit Content Collections (Schema in `src/content.config.ts`)
-- **Design-System** extern von `https://flomotlik.github.io/design-system/design-system.css`
+- **Design-System** extern von `https://design-system.flomotlik.me/design-system.css`
 - **Pagefind** als Postbuild-Schritt
 - **GitHub Pages**, `base: '/ai-build-guide'`
 

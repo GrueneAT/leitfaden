@@ -1,14 +1,14 @@
 ---
 title: Making it look right
 order: 9
-summary: "Link https://flomotlik.github.io/design-system/design-system.css and set the four body properties from --fm-* tokens — the design system styles no HTML tags, so without them the page renders unstyled. Use fm-* component classes. Must work at 375px and by keyboard."
+summary: "Link https://design-system.flomotlik.me/design-system.css and set the four body properties from --fm-* tokens — the design system styles no HTML tags, so without them the page renders unstyled. Use fm-* component classes. Must work at 375px and by keyboard."
 read_when: "Always, for anything with a user interface."
 ---
 
 ## One link
 
 ```html
-<link rel="stylesheet" href="https://flomotlik.github.io/design-system/design-system.css">
+<link rel="stylesheet" href="https://design-system.flomotlik.me/design-system.css">
 ```
 
 No npm, no build, no install. Verified working from a double-clicked local
@@ -21,7 +21,7 @@ For a tool whose look must not shift later — something archived, printed or
 handed on — link the frozen version instead:
 
 ```html
-<link rel="stylesheet" href="https://flomotlik.github.io/design-system/v1/design-system.css">
+<link rel="stylesheet" href="https://design-system.flomotlik.me/v1/design-system.css">
 ```
 
 ## The four lines everybody forgets
@@ -61,8 +61,8 @@ Values come from tokens: `--fm-color-*`, `--fm-space-1..6`, `--fm-text-*`,
 `--fm-radius-*`. Hard-code a value only where no token fits.
 
 The full style guide with live markup is at
-<https://flomotlik.github.io/design-system/>, a minimal working page at
-<https://flomotlik.github.io/design-system/examples/minimal.html>.
+<https://design-system.flomotlik.me/>, a minimal working page at
+<https://design-system.flomotlik.me/examples/minimal.html>.
 
 ## Colours are named by role, not by hue
 

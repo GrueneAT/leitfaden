@@ -29,7 +29,7 @@ Create `local.css` next to `index.html` and link it **after** the design
 system:
 
 ```html
-<link rel="stylesheet" href="https://flomotlik.github.io/design-system/design-system.css">
+<link rel="stylesheet" href="https://design-system.flomotlik.me/design-system.css">
 <link rel="stylesheet" href="local.css">
 ```
 
