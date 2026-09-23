@@ -7,7 +7,7 @@ Statische Astro-Site. Zwei Dinge in einem Repo:
 2. Ein **englischer Leitfaden für KI-Assistenzen**, der vorgibt, wie ein
    kleines Werkzeug gebaut sein muss.
 
-Live: https://flomotlik.github.io/ai-build-guide/ — persoenliche GitHub-Pages-Adresse.
+Live: https://ai-build-guide.flomotlik.me/ — eigene Domain, GitHub Pages.
 
 ## Die zwei Regeln, die alles andere bestimmen
 

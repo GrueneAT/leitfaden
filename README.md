@@ -4,7 +4,7 @@ Kurze Erklärung auf **Deutsch und Englisch**, dazu ein **englischer Leitfaden
 für KI-Assistenzen**, der beschreibt, wie ein kleines Werkzeug für Leute ohne
 Entwicklungsumgebung gebaut sein muss.
 
-**Live:** https://flomotlik.github.io/ai-build-guide/
+**Live:** https://ai-build-guide.flomotlik.me/
 
 ## Die Idee
 

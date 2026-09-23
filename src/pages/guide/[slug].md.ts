@@ -15,7 +15,7 @@ export const GET: APIRoute = ({ props }) => {
   const kopf = [
     `# ${d.title}`,
     '',
-    `Section ${d.order} of the build guide at https://flomotlik.github.io/ai-build-guide/guide/`,
+    `Section ${d.order} of the build guide at https://ai-build-guide.flomotlik.me/guide/`,
     `Read when: ${d.read_when}`,
     `Summary: ${d.summary}`,
     '',

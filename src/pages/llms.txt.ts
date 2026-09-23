@@ -1,7 +1,7 @@
 import type { APIRoute } from 'astro';
 import { getCollection } from 'astro:content';
 
-const BASIS = 'https://flomotlik.github.io/ai-build-guide';
+const BASIS = 'https://ai-build-guide.flomotlik.me';
 
 // Entry point for AI assistants, per the llms.txt convention. English on
 // purpose. Kept short: the core constraints inline, everything else linked.

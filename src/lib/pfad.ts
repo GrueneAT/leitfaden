@@ -1,5 +1,6 @@
-// Interne Links immer hierueber bauen. Die Site liegt unter einem base-Pfad
-// (/ai-build-guide), nackte Root-Pfade wuerden auf GitHub Pages ins Leere zeigen.
+// Interne Links immer hierueber bauen. Die Site liegt derzeit im Wurzel-
+// verzeichnis der eigenen Domain, aber BASE_URL bleibt die einzige Quelle
+// dafuer — nackte Root-Pfade waeren unter einem base-Pfad sofort kaputt.
 const BASE = import.meta.env.BASE_URL.replace(/\/$/, '');
 
 export function pfad(...teile: string[]): string {
