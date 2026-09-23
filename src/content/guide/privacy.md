@@ -1,7 +1,7 @@
 ---
 title: Data protection
 order: 13
-summary: "The tool must not transmit user data — no analytics, no tracking, no remote calls carrying file contents. But the page still makes network requests (CDN, design system, fonts pulled in by an @import you never wrote): check them before promising anything, and claim only that the FILES stay local. Separately: warn the user not to paste personal data, donor lists or non-public drafts into the chat."
+summary: "Precheck any data file before reading it: filename and header row only, flag PII columns, stop and offer structure-only or synthetic rows. The tool must not transmit user data — no analytics, no tracking, no remote calls carrying file contents. But the page still makes network requests (CDN, design system, fonts pulled in by an @import you never wrote): check them before promising anything, and claim only that the FILES stay local. Separately: warn the user not to paste personal data or non-public material into the chat."
 read_when: "Always. Especially when the tool touches names, addresses, finances or anything non-public."
 ---
 
@@ -94,6 +94,46 @@ plainly which files you read, and if you come across a membership list, an
 export with personal data or something marked confidential, name it and leave
 it alone rather than using it as sample data. Tell the user that a project
 folder is not a safe place for such files while an assistant is working in it.
+
+### The precheck, before you read a data file
+
+Everything above is a rule about intent. This is the step that catches the
+ordinary case: the user points you at `mitglieder.csv` because they want a tool
+built from it, and neither of you has thought about what is in it yet. Once you
+have read it, it is in the conversation and cannot be taken back out.
+
+So look before you read. **Never open a data file in full as your first
+action.**
+
+1. **Read the filename and the header row only.** For a CSV that is the first
+   line. For a spreadsheet, the first row. That is enough to decide, and it
+   costs you almost nothing if the file turns out to be fine.
+2. **Flag a column** when its name or a single example value looks like any of:
+   a person's name, a street address, a postcode together with a house number,
+   a date of birth, a national insurance or social security number, an IBAN or
+   account number, an email address, a phone number, a licence plate, an IP
+   address, a patient or case number — or anything in the special categories
+   that carry extra protection under GDPR Article 9: health, religion, trade
+   union membership, ethnicity, sexual orientation, biometrics.
+3. **Stop there if anything is flagged.** Do not read the rest of the file. Say
+   which columns you flagged and why, in one short list.
+4. **Offer the two ways forward**, in this order:
+   - work from the **structure alone** — the column names are usually all you
+     actually need to build the tool;
+   - or generate **synthetic rows** with the same shape and build against
+     those. Offer to write them; it is usually the unblocking move.
+5. **Continue into the real file only if the user confirms** it holds no
+   personal data. Their confirmation, not your assumption.
+
+A flagged file also never becomes a fixture: do not copy it into the project
+folder, do not paste rows from it into the chat, and do not commit it. The
+finished tool reads the real file on the user's own device, which is the whole
+point — the data never needed to reach you at all.
+
+**In a chat, the precheck happens before the paste.** You cannot inspect a
+header row the user has not sent yet, so ask for it: "paste just the column
+headings, not the rows." If real data arrives anyway, say so plainly, do not
+quote it back, and carry on from the structure.
 
 The substitute that works: **structure instead of content.** "I have a table
 with the columns Name, Year of birth, District, Amount — write the analysis

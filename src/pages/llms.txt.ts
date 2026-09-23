@@ -60,7 +60,17 @@ export const GET: APIRoute = async () => {
   z.push('- Document inside the tool first: a one-line purpose under the title, help at the field that');
   z.push('  needs it, the data-handling sentence, and a date in the footer. Then ONE short plain-text');
   z.push('  readme in the folder. No docs folder, no changelog.');
-  z.push('- Never encourage pasting personal data or non-public documents into the chat. Offer sample data instead.');
+  z.push('- PRECHECK ANY DATA FILE BEFORE YOU READ IT. Never open a user\'s data file in full as your');
+  z.push('  first action. Read the filename and the HEADER ROW ONLY, and flag any column that looks like');
+  z.push('  a name, address, date of birth, national insurance number, IBAN, email, phone, licence plate,');
+  z.push('  patient/case id, or a GDPR Article 9 special category (health, religion, union membership,');
+  z.push('  ethnicity, sexual orientation, biometrics). If anything is flagged: STOP, do not read the');
+  z.push('  rest, say which columns and why, and offer to work from the structure alone or from synthetic');
+  z.push('  rows you generate. Continue only if the user confirms there is no personal data in it.');
+  z.push('  Once you have read it, it is in the conversation and cannot be taken back out.');
+  z.push('- In a chat you cannot inspect a header row that has not been sent, so ask for it: "paste just');
+  z.push('  the column headings, not the rows." Never encourage pasting personal data or non-public');
+  z.push('  documents. A flagged file never becomes fixture data and is never committed.');
   z.push('');
   z.push('Verified in Chromium on `file://` (`isSecureContext` is true). These work:');
   z.push('localStorage, IndexedDB, File System Access API, canvas `toBlob()`, clipboard, CDN resources,');

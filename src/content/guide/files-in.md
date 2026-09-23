@@ -9,6 +9,12 @@ Everything happens on the device. The file is never uploaded — there is no
 server that could receive it. Say this in the UI; for this audience it is the
 deciding feature, not a detail.
 
+That is true of the **finished tool**. It is not true of you while you are
+building it. Before you read a file the user points you at, run the precheck in
+*Data protection* — filename and header row first, flag the personal-data
+columns, and stop there if any turn up. Once a file is in the conversation it
+cannot be taken back out.
+
 ## Always offer both ways in
 
 A file picker alone is a usability bug: people drag files. A drop zone alone
