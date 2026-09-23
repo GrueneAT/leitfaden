@@ -53,8 +53,8 @@ expect to be present is missing.
 
 A real case: a tool counted committee meetings from email exports and got it
 wrong — an entire committee was missing. It was caught only because the
-councillor kept his own records. The tool counted; the human knew. Say this
-plainly rather than implying the output is final.
+person using it kept their own records. The tool counted; the human knew. Say
+this plainly rather than implying the output is final.
 
 ## Offer the counter-arguments
 

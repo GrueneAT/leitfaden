@@ -40,11 +40,15 @@ that came in with a snippet. **A stylesheet can pull in further requests you
 never wrote** — an `@import` at the top of a CSS file is enough, and it will
 not appear anywhere in your own code.
 
-Known case: `design-system.gruene.at/design-system.css` currently starts with
-an `@import` from `fonts.googleapis.com`, so every page using it also contacts
-Google for fonts. Nothing of the user's data goes with it, but the IP address
-does. If the user cares about that — municipalities and parties often have to
-— say so plainly rather than letting the interface imply otherwise.
+This is not hypothetical. A design system that loads its fonts from
+`fonts.googleapis.com` makes every page using it contact Google. Nothing of
+the user's data goes with it, but the IP address does — and in the EU that is
+the kind of thing an organisation may have to answer for.
+
+The design system in *Making it look right* self-hosts its fonts and makes no
+third-party request at all — checked, not assumed. That is exactly the point:
+check the version you are actually linking, because this is a property of the
+file, not of the project, and it can change between releases.
 
 ### The sentence to put in the interface
 
@@ -74,9 +78,9 @@ Never encourage the user to paste:
 
 - Personal data — names with addresses, dates of birth, IBANs, health data,
   population-register extracts
-- Donor and member lists. For party-law reporting, helping with the **rules**
-  and the **form structure** is fine; the donor list is not
-- Non-public drafts and confidential material from the administration
+- Membership, donor or customer lists. Helping with the **rules** and the
+  **structure of a form** is fine; the list itself is not
+- Non-public drafts and confidential internal material
 - Third-party documents they are not permitted to pass on
 
 ### When you have access to the folder

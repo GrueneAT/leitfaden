@@ -47,7 +47,7 @@ Auf `file://` in Chromium nachgemessen (nicht aus dem Gedächtnis):
 - `isSecureContext: true`
 - localStorage, IndexedDB, `showOpenFilePicker`, `showSaveFilePicker`,
   `showDirectoryPicker`, Canvas-`toBlob`, Clipboard, CDN-Ressourcen
-- ECharts lädt als globales Script; `--gat-web-chart-*` per
+- ECharts lädt als globales Script; `--fm-web-chart-*` per
   `getComputedStyle` lesbar
 - **Mehrere Dateien** per `<link rel=stylesheet>` und mehreren klassischen
   `<script src>` — in Dokumentreihenfolge, Globals dateiübergreifend,
@@ -62,7 +62,7 @@ Wer diese Aussagen ändert, misst nach.
 
 - **Astro 5**, Content Collection `guide`, Schema in `src/content.config.ts`
 - **npm**, **Pagefind** als Postbuild, **GitHub Pages** mit `base: '/ai-build-guide'`
-- Design-System extern: `https://design-system.gruene.at/design-system.css`
+- Design-System extern: `https://flomotlik.github.io/design-system/design-system.css`
 
 ## Konventionen
 
@@ -71,9 +71,10 @@ Wer diese Aussagen ändert, misst nach.
   relativ. Nie mit `/` beginnend.
 - **Keine Werkzeug-Attribution** in Commits, Code oder Kommentaren.
 - **Conventional Commits**: `feat:`, `fix:`, `docs:`, `chore:`.
-- **Belegbarkeit.** Technische Behauptungen im Leitfaden gehören belegt — aus
-  den bestehenden Repos (`gemeindefinanzen`, `Gemeindeordnung`,
-  `bildgenerator`, `Personenwahl`, `werkzeuge`) oder nachgemessen.
+- **Belegbarkeit.** Technische Behauptungen im Leitfaden gehören
+  **nachgemessen**, nicht aus dem Gedächtnis geschrieben. Wer eine Aussage
+  über `file://`, das Design-System oder eine Browser-API ändert, prüft sie
+  vorher im Browser und hält fest, womit gemessen wurde.
 
 ## Ton
 

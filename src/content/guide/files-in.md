@@ -15,9 +15,9 @@ A file picker alone is a usability bug: people drag files. A drop zone alone
 is worse: it is invisible on touch devices.
 
 ```html
-<div class="gat-dropzone" id="zone">
-  <p class="gat-dropzone__label">Datei hierher ziehen</p>
-  <button class="gat-btn gat-btn--secondary gat-dropzone__trigger" id="pick">
+<div class="fm-dropzone" id="zone">
+  <p class="fm-dropzone__label">Datei hierher ziehen</p>
+  <button class="fm-btn fm-btn--secondary fm-dropzone__trigger" id="pick">
     Datei auswählen
   </button>
   <input type="file" id="input" accept=".csv,.pdf" multiple hidden>
@@ -54,7 +54,7 @@ zone.addEventListener('drop', function (e) {
 </script>
 ```
 
-`gat-dropzone` and `is-dragover` come from the design system and carry the
+`fm-dropzone` and `is-dragover` come from the design system and carry the
 dashed border and the highlight state.
 
 ## Getting the content out

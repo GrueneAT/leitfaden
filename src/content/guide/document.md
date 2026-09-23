@@ -23,7 +23,7 @@ user's language.
 
 ```html
 <h1>Voranschlag-Vergleich</h1>
-<p class="gat-subline">
+<p class="fm-subline">
   Zwei Voranschläge als PDF gegenüberstellen — Abweichungen je Ansatz,
   für die Vorbereitung der Gemeinderatssitzung.
 </p>
@@ -31,10 +31,10 @@ user's language.
 
 **Help where the question arises**, not in a manual. At the drop zone, say
 which format is expected; at an unusual field, say what it means. Use
-`gat-field__hint` for a field, `gat-dropzone__hint` for a drop zone.
+`fm-field__hint` for a field, `fm-dropzone__hint` for a drop zone.
 
 ```html
-<p class="gat-dropzone__hint">
+<p class="fm-dropzone__hint">
   VRV-2015-Voranschlag als PDF. Gescannte Dokumente funktionieren nicht.
 </p>
 ```
@@ -44,7 +44,7 @@ user's files, which is the part you can actually stand behind — see
 *Data protection* before you write it:
 
 ```html
-<p class="gat-callout gat-callout--info">
+<p class="fm-callout fm-callout--info">
   Deine Dateien werden nur in diesem Browser gelesen und nirgendwohin
   übertragen.
 </p>

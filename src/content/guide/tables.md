@@ -1,7 +1,7 @@
 ---
 title: Tables and numbers
 order: 6
-summary: "Use gat-table with gat-table__num for figures; right-align and use tabular-nums. Format with de-AT locale. Show a total row and make it verifiable. Sorting and filtering in plain JS, no grid library."
+summary: "Use fm-table with fm-table__num for figures; right-align and use tabular-nums. Format with de-AT locale. Show a total row and make it verifiable. Sorting and filtering in plain JS, no grid library."
 read_when: "The tool shows rows of data or does arithmetic the user will quote."
 ---
 
@@ -11,22 +11,22 @@ the tool is credible.
 ## Markup
 
 ```html
-<div class="gat-table-scroll">
-  <table class="gat-table gat-table--zebra">
+<div class="fm-table-scroll">
+  <table class="fm-table fm-table--zebra">
     <thead>
-      <tr><th>Ansatz</th><th class="gat-table__num">2025</th><th class="gat-table__num">2026</th></tr>
+      <tr><th>Ansatz</th><th class="fm-table__num">2025</th><th class="fm-table__num">2026</th></tr>
     </thead>
     <tbody id="rows"></tbody>
     <tfoot>
-      <tr><th>Summe</th><td class="gat-table__num" id="sum25"></td><td class="gat-table__num" id="sum26"></td></tr>
+      <tr><th>Summe</th><td class="fm-table__num" id="sum25"></td><td class="fm-table__num" id="sum26"></td></tr>
     </tfoot>
   </table>
 </div>
 ```
 
-`gat-table__num` right-aligns and switches on tabular figures so digits line
-up in columns. `gat-table-scroll` keeps a wide table scrolling inside itself
-instead of breaking the page on a phone. `gat-table--compact` and
+`fm-table__num` right-aligns and switches on tabular figures so digits line
+up in columns. `fm-table-scroll` keeps a wide table scrolling inside itself
+instead of breaking the page on a phone. `fm-table--compact` and
 `--dense` exist for data-heavy views.
 
 ## Formatting numbers

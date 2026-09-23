@@ -7,10 +7,10 @@ read_when: "Always. Read this before writing any code — it constrains every ot
 
 ## Who you are building for
 
-A part-time local councillor or volunteer. No development environment, no
-terminal, no code editor, no package manager, no admin rights on the laptop.
-They have a browser and a chat window with you. Their time budget is one
-evening.
+Someone doing this alongside their actual job — an administrator, an
+organiser, a volunteer. No development environment, no terminal, no code
+editor, no package manager, no admin rights on the laptop. They have a
+browser and a chat window with you. Their time budget is one evening.
 
 Anything that requires them to install software, run a command, or start a
 local server has failed before it starts. This is not a preference — it is the
@@ -155,14 +155,14 @@ the following are all available without a server.
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Tool name</title>
-<link rel="stylesheet" href="https://design-system.gruene.at/design-system.css">
+<link rel="stylesheet" href="https://flomotlik.github.io/design-system/design-system.css">
 <style>
   body {
     margin: 0;
     padding: 1.5rem;
-    background: var(--gat-color-surface);
-    color: var(--gat-color-text);
-    font-family: var(--gat-font-copy);
+    background: var(--fm-color-surface);
+    color: var(--fm-color-text);
+    font-family: var(--fm-font-copy);
   }
   main { max-width: 60rem; margin: 0 auto; }
 </style>

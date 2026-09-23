@@ -1,7 +1,7 @@
 ---
 title: Charts
 order: 7
-summary: "ECharts from CDN as a global script with a pinned version. Read the palette from the design-system CSS tokens --gat-web-chart-1..8 via getComputedStyle — do NOT import gat-charts.js, it is an ES module and fails on file://. Pick the chart type from the claim, label axes, state source and date."
+summary: "ECharts from CDN as a global script with a pinned version. Read the palette from the design-system CSS tokens --fm-web-chart-1..8 via getComputedStyle — do NOT import fm-charts.js, it is an ES module and fails on file://. Pick the chart type from the claim, label axes, state source and date."
 read_when: "The tool visualises numbers."
 ---
 
@@ -14,7 +14,7 @@ Most useless charts exist because the shape was chosen before the statement.
 | "More than last year" | grouped bars |
 | "This is how the total splits" | stacked bar — not a pie |
 | "This is the trend over the years" | line |
-| "One number decides it" | the number itself, `gat-metric-card` |
+| "One number decides it" | the number itself, `fm-metric-card` |
 | "Where it comes from, where it goes" | Sankey |
 
 A pie with seven slices says less than a sorted list. For a single figure, the
@@ -31,7 +31,7 @@ This build sets a global `echarts` — it works from a classic `<script>` and
 from a double-clicked file. **Pin the version.** Verified working from
 `file://`.
 
-The design system also publishes `gat-charts.js` with the palette and axis
+The design system also publishes `fm-charts.js` with the palette and axis
 helpers, but it is an **ES module**: `import` fails on `file://` however many
 files the tool has. Read
 the tokens from CSS instead — same colours, no module:
@@ -41,7 +41,7 @@ function palette() {
   var s = getComputedStyle(document.documentElement);
   var out = [];
   for (var i = 1; i <= 8; i++) {
-    out.push(s.getPropertyValue('--gat-web-chart-' + i).trim());
+    out.push(s.getPropertyValue('--fm-web-chart-' + i).trim());
   }
   return out;
 }
@@ -80,8 +80,8 @@ scales, and takes design-system colours:
 
 ```html
 <svg viewBox="0 0 120 40" role="img" aria-label="3 von 5 Fahrzeugen elektrifizierbar">
-  <rect x="0" y="0" width="72" height="40" fill="var(--gat-web-chart-1)"/>
-  <rect x="72" y="0" width="48" height="40" fill="var(--gat-web-chart-4)"/>
+  <rect x="0" y="0" width="72" height="40" fill="var(--fm-web-chart-1)"/>
+  <rect x="72" y="0" width="48" height="40" fill="var(--fm-web-chart-4)"/>
 </svg>
 ```
 

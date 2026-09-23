@@ -15,9 +15,8 @@ export const GET: APIRoute = async () => {
     'Complete text, all sections. Source: ' + BASIS + '/guide/ · Index: ' + BASIS + '/llms.txt',
   );
   teile.push('');
-  teile.push('Maintained by the Austrian Greens. The audience is a part-time local councillor');
-  teile.push('or volunteer with a browser and a chat window — no terminal, no editor, no');
-  teile.push('package manager. Every rule below follows from that.');
+  teile.push('The audience is someone with a browser and a chat window — no terminal, no');
+  teile.push('editor, no package manager, no admin rights. Every rule below follows from that.');
   teile.push('');
 
   for (const a of abschnitte) {

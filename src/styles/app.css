@@ -1,14 +1,14 @@
-/* Leitfaden — schlanker Site-CSS-Override.
-   Der Loewenanteil kommt aus dem DS (design-system.gruene.at/design-system.css).
-   Hier nur Layout-Wrapper und das, was das DS nicht abdeckt. */
+/* Build guide — thin site-level CSS on top of the design system.
+   The bulk comes from flomotlik.github.io/design-system/design-system.css; this file
+   holds only the layout wrappers and the few things the system does not cover. */
 
 * { box-sizing: border-box; }
 
 html, body {
   margin: 0;
-  background: var(--gat-web-bg, #f7f5f0);
-  color: var(--gat-color-text, #1f1f1f);
-  font: 16px/1.6 var(--gat-font-copy, system-ui), system-ui, -apple-system, "Segoe UI", sans-serif;
+  background: var(--fm-web-bg, #f4f6f8);
+  color: var(--fm-color-text, #1f2328);
+  font: 16px/1.6 var(--fm-font-copy, system-ui), system-ui, -apple-system, "Segoe UI", sans-serif;
 }
 
 main.lf-main {
@@ -19,11 +19,11 @@ main.lf-main {
 
 main.lf-main--schmal { max-width: 46rem; }
 
-a { color: var(--gat-color-dunkelgruen, #005538); }
+a { color: var(--fm-color-primary, #1f4a6d); }
 
 .lf-footer {
-  border-top: 1px solid var(--gat-web-border, #e4e0d8);
-  color: var(--gat-web-text-mute, #555);
+  border-top: 1px solid var(--fm-web-hairline, #dfe4ea);
+  color: var(--fm-web-text-mute, #555);
   padding: 2rem 1.25rem;
   text-align: center;
   font-size: 0.9em;
@@ -33,29 +33,29 @@ a { color: var(--gat-color-dunkelgruen, #005538); }
 .lf-hero { padding: 2.5rem 0 1.25rem; }
 .lf-hero h1 {
   margin: 0 0 0.6rem;
-  font-family: var(--gat-font-headline, inherit);
+  font-family: var(--fm-font-headline, inherit);
   font-size: clamp(1.9rem, 3vw + 1rem, 2.9rem);
   line-height: 1.12;
-  color: var(--gat-color-dunkelgruen, #005538);
+  color: var(--fm-color-primary, #1f4a6d);
 }
 .lf-hero__lead {
   margin: 0;
   font-size: 1.15rem;
   max-width: 62ch;
-  color: var(--gat-web-text-mute, #444);
+  color: var(--fm-web-text-mute, #444);
 }
 
 /* --- Abschnitte ------------------------------------------------------- */
 .lf-section { margin: 3rem 0 0; }
 .lf-section > h2 {
-  font-family: var(--gat-font-headline, inherit);
+  font-family: var(--fm-font-headline, inherit);
   font-size: 1.5rem;
-  color: var(--gat-color-dunkelgruen, #005538);
+  color: var(--fm-color-primary, #1f4a6d);
   margin: 0 0 0.35rem;
 }
 .lf-section__hint {
   margin: 0 0 1.25rem;
-  color: var(--gat-web-text-mute, #555);
+  color: var(--fm-web-text-mute, #555);
   max-width: 62ch;
 }
 
@@ -71,8 +71,8 @@ a { color: var(--gat-color-dunkelgruen, #005538); }
   flex-direction: column;
   gap: 0.45rem;
   padding: 1.1rem 1.2rem;
-  border: 1px solid var(--gat-web-border, #e4e0d8);
-  border-left: 4px solid var(--gat-color-hellgruen, #8ec63f);
+  border: 1px solid var(--fm-web-hairline, #dfe4ea);
+  border-left: 4px solid var(--fm-color-secondary, #8fb4cc);
   border-radius: 8px;
   background: #fff;
   text-decoration: none;
@@ -81,16 +81,16 @@ a { color: var(--gat-color-dunkelgruen, #005538); }
 }
 .lf-karte:hover,
 .lf-karte:focus-visible {
-  border-left-color: var(--gat-color-dunkelgruen, #005538);
+  border-left-color: var(--fm-color-primary, #1f4a6d);
   transform: translateY(-2px);
 }
 .lf-karte__titel {
-  font-family: var(--gat-font-headline, inherit);
+  font-family: var(--fm-font-headline, inherit);
   font-weight: 700;
   font-size: 1.1rem;
-  color: var(--gat-color-dunkelgruen, #005538);
+  color: var(--fm-color-primary, #1f4a6d);
 }
-.lf-karte__kurz { margin: 0; color: var(--gat-web-text-mute, #555); font-size: 0.95rem; }
+.lf-karte__kurz { margin: 0; color: var(--fm-web-text-mute, #555); font-size: 0.95rem; }
 .lf-karte__meta {
   margin-top: auto;
   padding-top: 0.5rem;
@@ -102,36 +102,36 @@ a { color: var(--gat-color-dunkelgruen, #005538); }
 
 /* --- Projekttyp-Karten (Entscheidungshilfe) --------------------------- */
 .lf-typ {
-  border: 1px solid var(--gat-web-border, #e4e0d8);
+  border: 1px solid var(--fm-web-hairline, #dfe4ea);
   border-radius: 8px;
   background: #fff;
   padding: 1.2rem 1.3rem;
 }
 .lf-typ h3 {
   margin: 0 0 0.3rem;
-  font-family: var(--gat-font-headline, inherit);
+  font-family: var(--fm-font-headline, inherit);
   font-size: 1.15rem;
-  color: var(--gat-color-dunkelgruen, #005538);
+  color: var(--fm-color-primary, #1f4a6d);
 }
 .lf-typ__einzeiler { margin: 0 0 0.8rem; }
 .lf-typ dl { margin: 0; display: grid; grid-template-columns: max-content 1fr; gap: 0.25rem 0.8rem; font-size: 0.92rem; }
-.lf-typ dt { color: var(--gat-web-text-mute, #666); }
+.lf-typ dt { color: var(--fm-web-text-mute, #666); }
 .lf-typ dd { margin: 0; }
 
 /* --- Kapitel-Fliesstext ----------------------------------------------- */
 .lf-kapitel { max-width: 44rem; }
 .lf-kapitel h2 {
-  font-family: var(--gat-font-headline, inherit);
+  font-family: var(--fm-font-headline, inherit);
   font-size: 1.45rem;
-  color: var(--gat-color-dunkelgruen, #005538);
+  color: var(--fm-color-primary, #1f4a6d);
   margin: 2.5rem 0 0.6rem;
   scroll-margin-top: 5rem;
 }
 .lf-kapitel h3 { font-size: 1.12rem; margin: 1.8rem 0 0.4rem; }
 .lf-kapitel p, .lf-kapitel li { max-width: 70ch; }
 .lf-kapitel pre {
-  background: #1f2621;
-  color: #e9efe9;
+  background: #1f2328;
+  color: #e8ecf1;
   padding: 0.9rem 1rem;
   border-radius: 6px;
   overflow-x: auto;
@@ -139,7 +139,7 @@ a { color: var(--gat-color-dunkelgruen, #005538); }
   line-height: 1.5;
 }
 .lf-kapitel :not(pre) > code {
-  background: #eceae3;
+  background: #f8fafc;
   padding: 0.1em 0.35em;
   border-radius: 4px;
   font-size: 0.9em;
@@ -147,12 +147,12 @@ a { color: var(--gat-color-dunkelgruen, #005538); }
 .lf-kapitel blockquote {
   margin: 1.2rem 0;
   padding: 0.2rem 0 0.2rem 1rem;
-  border-left: 3px solid var(--gat-color-hellgruen, #8ec63f);
-  color: var(--gat-web-text-mute, #555);
+  border-left: 3px solid var(--fm-color-secondary, #8fb4cc);
+  color: var(--fm-web-text-mute, #555);
 }
 .lf-kapitel table { border-collapse: collapse; width: 100%; font-size: 0.92rem; }
 .lf-kapitel th, .lf-kapitel td {
-  border-bottom: 1px solid var(--gat-web-border, #e4e0d8);
+  border-bottom: 1px solid var(--fm-web-hairline, #dfe4ea);
   padding: 0.45rem 0.6rem;
   text-align: left;
   vertical-align: top;
@@ -161,20 +161,20 @@ a { color: var(--gat-color-dunkelgruen, #005538); }
 /* --- Kapitel-Kopf ----------------------------------------------------- */
 .lf-kapitel-kopf { padding: 1.5rem 0 0.5rem; }
 .lf-kapitel-kopf h1 {
-  font-family: var(--gat-font-headline, inherit);
+  font-family: var(--fm-font-headline, inherit);
   font-size: clamp(1.7rem, 2.5vw + 1rem, 2.4rem);
-  color: var(--gat-color-dunkelgruen, #005538);
+  color: var(--fm-color-primary, #1f4a6d);
   margin: 0 0 0.5rem;
   line-height: 1.15;
 }
-.lf-kapitel-kopf__kurz { font-size: 1.08rem; color: var(--gat-web-text-mute, #444); max-width: 62ch; margin: 0 0 0.9rem; }
+.lf-kapitel-kopf__kurz { font-size: 1.08rem; color: var(--fm-web-text-mute, #444); max-width: 62ch; margin: 0 0 0.9rem; }
 .lf-kapitel-kopf__meta { display: flex; gap: 0.4rem; flex-wrap: wrap; align-items: center; font-size: 0.8rem; }
 
 .lf-rohtext {
   font-size: 0.8rem;
-  color: var(--gat-web-text-mute, #666);
+  color: var(--fm-web-text-mute, #666);
   text-decoration: none;
-  border: 1px dashed var(--gat-web-border, #d8d4cb);
+  border: 1px dashed var(--fm-web-hairline, #dfe4ea);
   border-radius: 999px;
   padding: 0.15rem 0.6rem;
 }
@@ -184,7 +184,7 @@ a { color: var(--gat-color-dunkelgruen, #005538); }
 .lf-weiter {
   margin-top: 3rem;
   padding-top: 1.2rem;
-  border-top: 1px solid var(--gat-web-border, #e4e0d8);
+  border-top: 1px solid var(--fm-web-hairline, #dfe4ea);
   display: flex;
   justify-content: space-between;
   gap: 1rem;
@@ -193,7 +193,7 @@ a { color: var(--gat-color-dunkelgruen, #005538); }
 
 .lf-kopierbox {
   background: #fff;
-  border: 1px solid var(--gat-web-border, #e4e0d8);
+  border: 1px solid var(--fm-web-hairline, #dfe4ea);
   border-radius: 8px;
   padding: 1rem 1.1rem;
 }
@@ -207,10 +207,10 @@ a { color: var(--gat-color-dunkelgruen, #005538); }
 /* --- Suche (Pagefind) ------------------------------------------------- */
 .lf-suche { margin: 0 0 1.5rem; }
 .lf-suche .pagefind-ui {
-  --pagefind-ui-primary: var(--gat-color-dunkelgruen, #005538);
-  --pagefind-ui-text: var(--gat-color-text, #1f1f1f);
+  --pagefind-ui-primary: var(--fm-color-primary, #1f4a6d);
+  --pagefind-ui-text: var(--fm-color-text, #1f2328);
   --pagefind-ui-background: #fff;
-  --pagefind-ui-border: var(--gat-web-border, #e4e0d8);
+  --pagefind-ui-border: var(--fm-web-hairline, #dfe4ea);
   --pagefind-ui-border-radius: 8px;
   --pagefind-ui-font: inherit;
 }
@@ -220,14 +220,14 @@ a { color: var(--gat-color-dunkelgruen, #005538); }
 .lf-schritte li { margin-bottom: 0.35rem; max-width: 62ch; }
 
 .lf-beispiele { margin: 0 0 1rem; padding-left: 1.4rem; list-style: disc; }
-.lf-beispiele li { margin-bottom: 0.4rem; max-width: 68ch; font-style: italic; color: var(--gat-web-text-mute, #444); }
+.lf-beispiele li { margin-bottom: 0.4rem; max-width: 68ch; font-style: italic; color: var(--fm-web-text-mute, #444); }
 
-.lf-hinweis { color: var(--gat-web-text-mute, #555); max-width: 62ch; }
+.lf-hinweis { color: var(--fm-web-text-mute, #555); max-width: 62ch; }
 
 .lf-kopierbox__titel { margin: 0; font-weight: 700; }
 .lf-kopierbox pre {
-  background: #1f2621;
-  color: #e9efe9;
+  background: #1f2328;
+  color: #e8ecf1;
   padding: 0.9rem 1rem;
   border-radius: 6px;
   overflow-x: auto;
@@ -238,10 +238,10 @@ a { color: var(--gat-color-dunkelgruen, #005538); }
 .lf-kopierbox__fuss {
   margin: 0.7rem 0 0;
   font-size: 0.9rem;
-  color: var(--gat-web-text-mute, #555);
+  color: var(--fm-web-text-mute, #555);
 }
 
-.gat-callout + .gat-callout { margin-top: 1rem; }
+.fm-callout + .fm-callout { margin-top: 1rem; }
 
 /* Das DS setzt list-style zurueck — im Fliesstext brauchen wir Marker. */
 .lf-kapitel ul { list-style: disc; padding-left: 1.4rem; }

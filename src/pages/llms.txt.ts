@@ -13,8 +13,7 @@ export const GET: APIRoute = async () => {
   z.push('');
   z.push(
     '> How to build a small tool for someone who has a browser and nothing else — no terminal, ' +
-      'no editor, no package manager, no admin rights. Maintained by the Austrian Greens for local ' +
-      'councillors and volunteers, but nothing in it is specific to them.',
+      'no editor, no package manager, no admin rights.',
   );
   z.push('');
   z.push('## Read this first');
@@ -36,12 +35,14 @@ export const GET: APIRoute = async () => {
   z.push('- NO `fetch()` or XHR on a local file — also blocked. Ship data as a `.js` file that');
   z.push('  assigns a global (`window.DATEN = {...}`), loaded with a plain `<script src>`.');
   z.push('- Pin every CDN version. `@latest` breaks the tool on a random day.');
-  z.push('- Link the design system: https://design-system.gruene.at/design-system.css');
-  z.push('  It styles no HTML tags — you must set `body` margin/background/color/font-family from the `--gat-*` tokens.');
-  z.push('  It is the AUSTRIAN Greens\' system. For another organisation do not fork or copy it: add a');
-  z.push('  `lokal.css` AFTER it that overrides ~15 brand tokens in a plain `:root` block (see "Adapting');
-  z.push('  the look"). Ask before rebranding — never apply another party\'s colours unprompted.');
-  z.push('- Write the interface in the language the tool will be USED in — derived from the municipality,');
+  z.push('- Link the design system: https://flomotlik.github.io/design-system/design-system.css');
+  z.push('  It styles no HTML tags — you must set `body` margin/background/color/font-family from the `--fm-*` tokens.');
+  z.push('  Its colours are named by ROLE (--fm-color-primary, -secondary, -accent), never by hue.');
+  z.push('  For an organisation with its own colours do not fork or copy it: add a `local.css` AFTER it');
+  z.push('  that overrides about eight role tokens in a plain `:root` block (see "Adapting the look").');
+  z.push('  Ask before rebranding — never apply an organisation\'s colours unprompted. Never recolour');
+  z.push('  --fm-web-status-* or the warn/error/success variants: green means ok everywhere.');
+  z.push('- Write the interface in the language the tool will be USED in — derived from the organisation,');
   z.push('  institution or audience, NOT from the language the request was written in. A request in English');
   z.push('  about a Flemish town council means a Dutch interface. Ask once if the two genuinely conflict.');
   z.push('  Number/date format, the readme filename and export labels follow that same language.');
@@ -59,7 +60,7 @@ export const GET: APIRoute = async () => {
   z.push('- Document inside the tool first: a one-line purpose under the title, help at the field that');
   z.push('  needs it, the data-handling sentence, and a date in the footer. Then ONE short plain-text');
   z.push('  readme in the folder. No docs folder, no changelog.');
-  z.push('- Never encourage pasting personal data, donor lists or non-public papers into the chat. Offer sample data instead.');
+  z.push('- Never encourage pasting personal data or non-public documents into the chat. Offer sample data instead.');
   z.push('');
   z.push('Verified in Chromium on `file://` (`isSecureContext` is true). These work:');
   z.push('localStorage, IndexedDB, File System Access API, canvas `toBlob()`, clipboard, CDN resources,');
@@ -81,8 +82,7 @@ export const GET: APIRoute = async () => {
   z.push('');
   z.push('## Related');
   z.push('');
-  z.push('- [Design system](https://design-system.gruene.at/): tokens, components, live style guide');
-  z.push('- [Tool directory](https://werkzeuge.gruene.at/): check whether it already exists before building');
+  z.push('- [Design system](https://flomotlik.github.io/design-system/): tokens, components, live style guide');
   z.push(`- [Human-readable start page](${BASIS}/en/)`);
   z.push('');
 

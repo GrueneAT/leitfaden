@@ -1,9 +1,9 @@
 {
-  "name": "leitfaden",
+  "name": "ai-build-guide",
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "Leitfaden: eigene kleine Web-Werkzeuge mit KI bauen — fuer Gemeinderaetinnen, Gemeinderaete und Gruene Gruppierungen",
+  "description": "Guide for building small browser-only tools with an AI assistant",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",

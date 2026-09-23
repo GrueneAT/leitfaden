@@ -35,25 +35,21 @@ const nav = en
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#257639" />
+    <meta name="theme-color" content="#1f4a6d" />
     <title>{fullTitle}</title>
     <meta name="description" content={desc} />
-    <link rel="icon" type="image/svg+xml" href="https://design-system.gruene.at/assets/gruene-logo.svg" />
-    <link rel="stylesheet" href="https://design-system.gruene.at/design-system.css" />
+    <link rel="stylesheet" href="https://flomotlik.github.io/design-system/design-system.css" />
     <link rel="alternate" type="text/plain" href={datei('llms.txt')} title="llms.txt" />
   </head>
   <body>
-    <a class="gat-skiplink" href="#main">{en ? 'Skip to content' : 'Zum Hauptinhalt springen'}</a>
-    <header class="gat-header">
-      <div class="gat-header__inner">
-        <a class="gat-header__brand" href={en ? pfad('en') : pfad()}>
-          <img class="gat-header__logo"
-               src="https://design-system.gruene.at/assets/gruene-logo.svg"
-               alt="Die Grünen" />
-          <span class="gat-header__wordmark">{en ? 'Build your own tools' : 'Eigene Werkzeuge'}</span>
+    <a class="fm-skiplink" href="#main">{en ? 'Skip to content' : 'Zum Hauptinhalt springen'}</a>
+    <header class="fm-header">
+      <div class="fm-header__inner">
+        <a class="fm-header__brand" href={en ? pfad('en') : pfad()}>
+          <span class="fm-header__wordmark">{en ? 'Build your own tools' : 'Eigene Werkzeuge'}</span>
         </a>
-        <nav class="gat-header__nav" aria-label={en ? 'Main navigation' : 'Hauptnavigation'}>
-          <ul class="gat-header__nav-list">
+        <nav class="fm-header__nav" aria-label={en ? 'Main navigation' : 'Hauptnavigation'}>
+          <ul class="fm-header__nav-list">
             {nav.map((n) => <li><a href={n.href}>{n.label}</a></li>)}
           </ul>
         </nav>
@@ -64,13 +60,12 @@ const nav = en
     </main>
     <footer class="lf-footer">
       <p>
-        {en ? 'Die Grünen · ' : 'Die Grünen · '}
         <a href="https://github.com/flomotlik/ai-build-guide">{en ? 'Source and issues on GitHub' : 'Quellcode und Issues auf GitHub'}</a>
       </p>
       <p>
         <a href={datei('llms.txt')}>llms.txt</a> ·
         <a href={datei('llms-full.txt')}>llms-full.txt</a> ·
-        <a href="https://werkzeuge.gruene.at/">werkzeuge.gruene.at</a>
+        <a href="https://flomotlik.github.io/design-system/">{en ? 'Design system' : 'Design-System'}</a>
       </p>
     </footer>
   </body>
