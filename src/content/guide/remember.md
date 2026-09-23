@@ -1,7 +1,7 @@
 ---
 title: Keeping data
 order: 5
-summary: "localStorage for settings and drafts (wrap every read in try/catch), IndexedDB for large or structured data. Storage is device-bound and can vanish — an export button is mandatory, not a feature."
+summary: "localStorage for settings and drafts (wrap every read in try/catch), IndexedDB for large or structured data, SQLite-on-WASM only for real queries. navigator.storage.persist() asks the browser not to evict, but may refuse — an export button is the actual backup and is mandatory, not a feature."
 read_when: "Anything should survive closing the tab: settings, entered data, imported files."
 ---
 
@@ -57,6 +57,32 @@ still works on a static host.
 
 This is a multi-session project, not an evening. Only propose it when the
 analysis genuinely needs SQL.
+
+## Asking the browser not to throw it away
+
+Browsers evict site data under disk pressure, and a tool that parked a parsed
+dataset in IndexedDB is a fat target. You can ask for it to be spared:
+
+```js
+async function keepStorage() {
+  if (!navigator.storage || !navigator.storage.persist) return false;
+  try { return await navigator.storage.persist(); } catch (e) { return false; }
+}
+
+async function storageLeft() {
+  if (!navigator.storage || !navigator.storage.estimate) return null;
+  try { return await navigator.storage.estimate(); }   // { usage, quota }
+  catch (e) { return null; }
+}
+```
+
+Treat a `false` as the normal case, not an error. It is a request, not a
+setting: the browser decides, it may refuse without explanation, and from a
+double-clicked file it may not be granted at all. Feature-check both, wrap
+both, and never let either one block startup.
+
+So it does not change what you must tell the user below — it only improves the
+odds. **An export button is still the actual backup.**
 
 ## What the tool must tell the user
 
