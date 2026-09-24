@@ -1,7 +1,7 @@
 ---
 title: Keeping data
 order: 5
-summary: "localStorage for settings and drafts (wrap every read in try/catch), IndexedDB for large or structured data, SQLite-on-WASM only for real queries. navigator.storage.persist() asks the browser not to evict, but may refuse — an export button is the actual backup and is mandatory, not a feature."
+summary: "localStorage for settings and drafts (wrap every read in try/catch), IndexedDB for large or structured data, SQLite-on-WASM only for real queries. navigator.storage.persist() returns false from a double-clicked file (measured), so it is no help there; estimate() does work — an export button is the actual backup and is mandatory, not a feature."
 read_when: "Anything should survive closing the tab: settings, entered data, imported files."
 ---
 
@@ -76,13 +76,23 @@ async function storageLeft() {
 }
 ```
 
-Treat a `false` as the normal case, not an error. It is a request, not a
-setting: the browser decides, it may refuse without explanation, and from a
-double-clicked file it may not be granted at all. Feature-check both, wrap
-both, and never let either one block startup.
+**Measured, not assumed:** from a double-clicked file in Chromium 153,
+`navigator.storage.persist()` returns **`false`**. It does not throw, it does
+not prompt, and `persisted()` stays `false` afterwards. So on the delivery path
+this guide is about, persistence is simply not granted — there is no real
+origin to grant it to.
 
-So it does not change what you must tell the user below — it only improves the
-odds. **An export button is still the actual backup.**
+`estimate()` does work there and reported a 10 GiB quota against 0 bytes used,
+which makes it the more useful of the two: it is what lets a tool say "you are
+using 12 MB of about 10 GB" instead of guessing.
+
+Keep the feature checks and the `try`/`catch` anyway — the same tool opened
+from a real `https://` origin will behave differently, and that is where
+`persist()` can actually return `true`. Treat `false` as the normal case, never
+as an error, and never let either call block startup.
+
+None of this changes what you must tell the user below.
+**An export button is still the actual backup.**
 
 ## What the tool must tell the user
 

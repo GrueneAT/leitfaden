@@ -52,9 +52,22 @@ Auf `file://` in Chromium nachgemessen (nicht aus dem Gedächtnis):
 - **Mehrere Dateien** per `<link rel=stylesheet>` und mehreren klassischen
   `<script src>` — in Dokumentreihenfolge, Globals dateiübergreifend,
   relative Bilder, Unterordner inklusive
+- `navigator.storage`, `.persist`, `.persisted`, `.estimate` existieren;
+  `persist()` liefert **false** (wirft nicht, fragt nicht), `estimate()`
+  funktioniert (10-GiB-Quota gemeldet). Gemessen in Chromium 153.
+- `caches.open()` funktioniert — nuetzt aber nichts, weil sich kein Service
+  Worker registrieren laesst (Origin `null`)
 
-**Nicht** verfügbar: ES-Module (CORS gegen Origin `null`) und `fetch()`/XHR
-auf lokale Dateien (`URL scheme "file" is not supported`).
+**Nicht** verfügbar: ES-Module, `fetch()`/XHR auf lokale Dateien und
+Service-Worker-Registrierung — alle drei mit derselben Begruendung, CORS gegen
+Origin `null`. Nachgemessen in Chromium 153; die Konsole nennt dabei explizit
+`from origin 'null' has been blocked by CORS policy`.
+
+Achtung beim Nachmessen: `--allow-file-access-from-files` hebt genau diese
+Sperren auf. Wer mit dem Flag misst, bekommt „funktioniert" und liegt falsch —
+echte Nutzerinnen haben es nicht. Ebenso verwirrend: `location.origin` meldet
+auf `file://` den String `"file://"`, waehrend der Netzwerk-Origin fuer CORS
+`null` ist.
 
 Wer diese Aussagen ändert, misst nach.
 
